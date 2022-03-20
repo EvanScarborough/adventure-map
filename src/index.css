@@ -3,6 +3,7 @@ html, body, #root {
   height: 100%;
 }
 
+/* https://www.1001fonts.com/actonia-personal-use-font.html */
 @font-face {
   font-family: 'actonia';
   src: local('actonia'), url(./fonts/actonia.ttf) format('truetype');
