@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const PageArea = styled.div`
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 
 export const BackgroundArea = styled.div`
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -24,6 +24,7 @@ export const BackgroundArea = styled.div`
 export const LoginArea = styled.div`
     z-index: 100;
     width: calc(100% - 48px);
+    margin: 48px 0;
     max-width: 400px;
     min-height: 400px;
     background-color: ${props => props.theme.color.base.main};
