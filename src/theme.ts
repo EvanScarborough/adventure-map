@@ -18,6 +18,12 @@ export const theme = {
             light: "#a0cf7d",
             dark: "#467721",
             contrast: "#fff"
+        },
+        error: {
+            main: "#f27263",
+            light: "#fca49a",
+            dark: "#b3483d",
+            contrast: "#fff"
         }
     },
     border: {
@@ -27,6 +33,11 @@ export const theme = {
             large: "16px"
         },
         width: "3px"
+    },
+    padding: {
+        small: "4px",
+        med: "8px",
+        large: "60px"
     },
     margin: {
         small: "8px",

@@ -1,26 +1,34 @@
 import styled from "styled-components";
 
 type TypographyProps = {
-    center?: number
+    center?: number,
+    inheritColor?: number,
+    margin?: string,
+    padding?: string
 };
 
 
 export const FancyHeader = styled.h1<TypographyProps>`
     font-size: 4em;
     font-family: ${props => props.theme.font.standout};
-    color: ${props => props.theme.color.primary.main};
-    margin: 10px 0;
+    color: ${props => props.inheritColor ? "inherit" : props.theme.color.primary.main};
+    margin: ${props => props.margin ?? "10px 0"};
+    padding: ${props => props.padding ?? "10"};
     text-align: ${props => props.center ? "center" : "left"};
 `;
 
 export const Body = styled.p<TypographyProps>`
-    color: ${props => props.theme.color.base.overlay};
+    color: ${props => props.inheritColor ? "inherit" : props.theme.color.base.overlay};
     font-size: 1em;
     text-align: ${props => props.center ? "center" : "left"};
+    margin: ${props => props.margin ?? "10px 0"};
+    padding: ${props => props.padding ?? "10"};
 `;
 
 export const SmallNote = styled.p<TypographyProps>`
-    color: ${props => props.theme.color.primary.light};
+    color: ${props => props.inheritColor ? "inherit" : props.theme.color.primary.light};
     font-size: 1em;
     text-align: ${props => props.center ? "center" : "left"};
+    margin: ${props => props.margin ?? "10px 0"};
+    padding: ${props => props.padding ?? "10"};
 `;

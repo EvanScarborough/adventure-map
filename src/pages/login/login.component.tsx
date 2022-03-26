@@ -6,6 +6,7 @@ import { Form, Label, TextInput, ButtonInput } from "../../components/form.style
 import { FancyHeader, Body } from "../../components/typography.styled";
 import { DottedDivider, StyledLink } from "../../components/basic.styled";
 import { post } from "../../api/api";
+import Banner from "../../components/Banner.component";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const LoginPage = () => {
             .then(data => {
                 console.log(data);
             })
-            .catch(err => setWarning(err));
+            .catch(err => setWarning(err.message));
     }
 
     return(
@@ -28,7 +29,7 @@ const LoginPage = () => {
             <LoginArea>
                 <FancyHeader>Welcome!</FancyHeader>
                 <DottedDivider />
-                {warning ?? <div>{warning}</div>}
+                {warning && <Banner type="error">{warning}</Banner>}
                 <Form onSubmit={submit}>
                     <Label htmlFor="email">Email</Label>
                     <TextInput type="text" id="email" name="email" value={email}
