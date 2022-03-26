@@ -4,16 +4,22 @@ import { Form, Label, TextInput, ButtonInput } from "../../components/form.style
 import { FancyHeader, Body } from "../../components/typography.styled";
 import { DottedDivider, StyledLink } from "../../components/basic.styled";
 import { post } from "../../api/api";
-import LoginResponse from "../../types/responses/login-response";
+import Auth from "../../types/auth";
 import Banner from "../../components/Banner.component";
 import RegisterRequest from "../../types/requests/register-request";
+import { useNavigate } from 'react-router-dom';
 
-const RegisterPage = () => {
+interface RegisterPageProps {
+    login:(auth:Auth)=>void
+};
+const RegisterPage = ({ login }:RegisterPageProps) => {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
     const [warning, setWarning] = useState("");
+
+    let navigate = useNavigate();
 
     const submit = (e : React.SyntheticEvent) => {
         e.preventDefault();
@@ -22,9 +28,10 @@ const RegisterPage = () => {
             return;
         }
         const request:RegisterRequest = { Email:email, DisplayName:name, Password:password };
-        post<LoginResponse>("/user", request)
+        post<Auth>("/user", request)
             .then(data => {
-                console.log(data);
+                login(data);
+                navigate("/");
             })
             .catch(err => setWarning(err.message));
     }

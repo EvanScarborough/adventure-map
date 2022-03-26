@@ -1,7 +1,7 @@
-export default interface loginResponse {
+export default interface Auth {
     UserId:number,
     DisplayName:string,
     Email:string,
-    Role:number,
+    Role:string,
     Token:string
 };
