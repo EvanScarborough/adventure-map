@@ -1,0 +1,1 @@
+export type LocationType = "Restaurant" | "Shopping" | "Experience" | "Point of Interest";

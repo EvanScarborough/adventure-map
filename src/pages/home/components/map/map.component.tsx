@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './marker.component';
 import style, { MARKER_SIZE } from './map-style';
+import { Location } from '../../../../types/location';
 
-const Map = () => {
+interface MapProps {
+    locations:Location[]
+};
+const Map = ({ locations }: MapProps) => {
     const lat = 39.7242;
     const lng = -104.9903;
 
@@ -19,7 +23,7 @@ const Map = () => {
                 hoverDistance={MARKER_SIZE / 2}
                 onDragEnd={e => console.log(e)}
             >
-                <Marker lat={lat} lng={lng}/>
+                {locations.map(l => <Marker key={l.LocationId} lat={l.Latitude} lng={l.Longitude} location={l}/>)}
             </GoogleMapReact>
         </div>
     );
