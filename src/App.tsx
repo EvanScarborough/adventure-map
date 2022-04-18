@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,20 +10,18 @@ import HomePage from './pages/home/home.component';
 import LoginPage from './pages/login/login.component';
 import RegisterPage from './pages/login/register.component';
 import Auth from './types/auth';
+import AuthContext from './hooks/auth-context';
 
 const AUTH_LOCALSTORAGE_KEY = "auth";
 
-export const AuthContext = React.createContext<Auth|null>(null);
-
 const App = () => {
-  const [auth, setAuth] = useState<Auth|null>(null);
+  const [auth,setAuth] = useState<Auth|null>(null);
 
   useEffect(() => {
     const storedString:string|null = localStorage.getItem(AUTH_LOCALSTORAGE_KEY);
     if (storedString == null || storedString === "") return;
     try {
       const storedAuth:Auth|null = JSON.parse(storedString);
-      console.log(storedAuth);
       setAuth(storedAuth);
     }
     catch(err) { /* nbd just log in again */ }

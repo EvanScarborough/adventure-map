@@ -27,7 +27,7 @@ const RegisterPage = ({ login }:RegisterPageProps) => {
             setWarning("Passwards do not match");
             return;
         }
-        const request:RegisterRequest = { Email:email, DisplayName:name, Password:password };
+        const request:RegisterRequest = { email:email, displayName:name, password:password };
         post<Auth>("/user", request)
             .then(data => {
                 login(data);

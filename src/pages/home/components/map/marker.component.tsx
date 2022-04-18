@@ -12,8 +12,8 @@ interface MarkerProps {
 const Marker = ({ lat, lng, location, $hover }:MarkerProps) => {
     return (
         <MarkerArea hovered={$hover ? 1 : 0}>
-            <MarkerFlag>{location.Name}</MarkerFlag>
-            <MarkerDot locationType={location.LocationType} />
+            <MarkerFlag>{location.name}</MarkerFlag>
+            <MarkerDot locationType={location.locationType} />
             {/* {$hover && <Tooltip/>} */}
         </MarkerArea>
     );

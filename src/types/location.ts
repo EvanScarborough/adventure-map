@@ -1,20 +1,25 @@
 import { LocationType } from "./location-type";
+import { User } from "./user";
 
 export interface Location {
-    LocationId:number,
-    Name:string,
-    Description:string,
-    LocationType:LocationType,
-    AddressLine1:string,
-    AddressLine2?:string,
-    City:string,
-    State:string,
-    ZipCode?:string,
-    Country:string,
-    AreaName?:string,
-    Latitude:number,
-    Longitude:number,
-    AddedByUserId:number,
-    AddedAtTime:Date,
-    IsPrivate:boolean
+    locationId:number,
+    name:string,
+    description:string,
+    locationType:LocationType,
+    addressLine1:string,
+    addressLine2?:string,
+    city:string,
+    state:string,
+    zipCode?:string,
+    country:string,
+    neighborhood?:string,
+    latitude:number,
+    longitude:number,
+    addedByUser:User,
+    addedAtTime:Date,
+    isPrivate:boolean,
+    rating:number,
+    myRating:number,
+    adventureCount:number,
+    myAdventureCount:number
 };

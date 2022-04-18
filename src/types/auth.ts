@@ -1,7 +1,9 @@
+import { UserRole } from "./user-role";
+
 export default interface Auth {
-    UserId:number,
-    DisplayName:string,
-    Email:string,
-    Role:string,
-    Token:string
+    userId:number,
+    displayName:string,
+    email:string,
+    role:UserRole,
+    token:string
 };

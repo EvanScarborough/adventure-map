@@ -6,7 +6,7 @@ const locationTypeMapping:Record<LocationType,string> = {
     "Restaurant":"#d04621",
     "Shopping":"#51bfab",
     "Experience":"#fcce41",
-    "Point of Interest":"#555"
+    "PointOfInterest":"#555"
 }
 
 interface MarkerAreaProps {

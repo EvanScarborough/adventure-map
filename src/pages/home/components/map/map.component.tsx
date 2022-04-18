@@ -23,7 +23,7 @@ const Map = ({ locations }: MapProps) => {
                 hoverDistance={MARKER_SIZE / 2}
                 onDragEnd={e => console.log(e)}
             >
-                {locations.map(l => <Marker key={l.LocationId} lat={l.Latitude} lng={l.Longitude} location={l}/>)}
+                {locations.map(l => <Marker key={l.locationId} lat={l.latitude} lng={l.longitude} location={l}/>)}
             </GoogleMapReact>
         </div>
     );

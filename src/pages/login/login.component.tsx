@@ -21,7 +21,7 @@ const LoginPage = ({ login }:LoginPageProps) => {
 
     const submit = (e : React.SyntheticEvent) => {
         e.preventDefault();
-        const request:LoginRequest = { Email:email, Password:password };
+        const request:LoginRequest = { email:email, password:password };
         post<Auth>("/auth/login", request)
             .then(data => {
                 login(data);
