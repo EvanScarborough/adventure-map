@@ -1,5 +1,5 @@
 import { Location } from "../../../../types/location";
-import { MarkerArea, MarkerDot, MarkerFlag } from "../../home.styled";
+import { MarkerArea, MarkerDot, MarkerFlag, MarkerFlagArea } from "../../home.styled";
 import Tooltip from "./tooltip.component";
 
 
@@ -12,8 +12,10 @@ interface MarkerProps {
 const Marker = ({ lat, lng, location, $hover }:MarkerProps) => {
     return (
         <MarkerArea hovered={$hover ? 1 : 0}>
-            <MarkerFlag>{location.name}</MarkerFlag>
-            <MarkerDot locationType={location.locationType} />
+            <MarkerFlagArea hovered={$hover ? 1 : 0}>
+                <MarkerFlag>{location.name}</MarkerFlag>
+            </MarkerFlagArea>
+            <MarkerDot locationType={location.locationType} adventureCount={location.myAdventureCount} />
             {/* {$hover && <Tooltip/>} */}
         </MarkerArea>
     );

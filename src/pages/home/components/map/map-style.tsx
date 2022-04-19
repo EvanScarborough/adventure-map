@@ -181,6 +181,15 @@ const style = [
                 "color": "#71b0b0"
             }
         ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "color": "#acdbdb"
+            }
+        ]
     }
 ];
 
