@@ -63,3 +63,39 @@ export const MarkerFlag = styled.p`
     margin: 0;
     margin-top: 1px;
 `;
+
+
+
+
+interface ShowControlPanelButtonProps {
+    show:number
+};
+export const ShowControlPanelButton = styled.button<ShowControlPanelButtonProps>`
+    position: absolute;
+    top: 10px;
+    left: ${props => props.show ? "calc(100% - 60px)" : "100%"};
+    z-index: 1001;
+    border: none;
+    border-radius: ${props => props.show ? "8px" : "0 8px 8px 0"};
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    box-shadow: ${props => props.show ? "0 0 6px rgba(0,0,0,0.2)" : "0 0 12px rgba(0,0,0,0.5)"};
+    transition: box-shadow 0.2s, left 0.2s;
+`;
+
+interface SideControlPanelProps {
+    show:number
+};
+export const SideControlPanel = styled.div<SideControlPanelProps>`
+    position: fixed;
+    top: 0;
+    left: ${props => props.show ? "0" : "-400px"};
+    width: 400px;
+    max-width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    transition: left 0.2s;
+`;
