@@ -17,6 +17,14 @@ export const FancyHeader = styled.h1<TypographyProps>`
     text-align: ${props => props.center ? "center" : "left"};
 `;
 
+export const SmallTitle = styled.h2<TypographyProps>`
+    font-size: 1em;
+    color: ${props => props.inheritColor ? "inherit" : props.theme.color.base.overlay};
+    margin: ${props => props.margin ?? "10px 0"};
+    padding: ${props => props.padding ?? "10"};
+    text-align: ${props => props.center ? "center" : "left"};
+`;
+
 export const Body = styled.p<TypographyProps>`
     color: ${props => props.inheritColor ? "inherit" : props.theme.color.base.overlay};
     font-size: 1em;

@@ -21,17 +21,20 @@ export const MarkerArea = styled.div<MarkerAreaProps>`
 
 interface MarkerDotProps {
     locationType:LocationType,
-    adventureCount:number
+    adventureCount:number,
+    displaySimple?:number
 };
 export const MarkerDot = styled.div<MarkerDotProps>`
-    position: absolute;
+    ${props => props.displaySimple ? "" : "position: absolute;"}
     width: ${MARKER_SIZE-4}px;
     height: ${MARKER_SIZE-4}px;
+    min-width: ${MARKER_SIZE-4}px;
+    min-height: ${MARKER_SIZE-4}px;
     background-color: ${props => props.adventureCount ? locationTypeMapping[props.locationType] : "#fff"};
     border: solid 2px ${props => props.adventureCount ? "white" : locationTypeMapping[props.locationType]};
     border-radius: 12px;
     box-shadow: inset -2px -2px 8px rgba(0,0,0,0.3), 2px 6px 3px rgba(0,0,0,0.2);
-    cursor: pointer;
+    ${props => props.displaySimple ? "margin: 8px;" : "cursor: pointer;"}
 `;
 
 interface MarkerFlagAreaProps {
@@ -92,10 +95,24 @@ export const SideControlPanel = styled.div<SideControlPanelProps>`
     top: 0;
     left: ${props => props.show ? "0" : "-400px"};
     width: 400px;
-    max-width: 100vw;
+    max-width: ${props => props.show ? "100vw" : "400px"};
     height: 100vh;
     z-index: 1000;
     background-color: white;
     box-shadow: 0 0 12px rgba(0,0,0,0.5);
     transition: left 0.2s;
+`;
+
+export const CardHolderArea = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+`;
+
+export const LocationCardArea = styled.div`
+    width: 100%;
+    margin: 4px 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 `;

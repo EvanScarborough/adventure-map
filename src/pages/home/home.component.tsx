@@ -5,7 +5,12 @@ import Map from "./components/map/map.component";
 import useLocations from "./hooks/useLocations";
 
 const HomePage = () => {
-    const { locations } = useLocations();
+    const { locations, errorMessage } = useLocations();
+    if (errorMessage) {
+        return(
+            <div>{errorMessage}</div>
+        );
+    }
     return(
         <>
             <Map locations={locations}/>

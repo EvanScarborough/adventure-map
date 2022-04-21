@@ -2,7 +2,14 @@ import Auth from "../types/auth";
 
 export const API_URL = process.env.REACT_APP_API_URL;
 
-export const get = async <T>(endpoint:string, auth:Auth|null=null):Promise<T> => {
+export interface ApiResponse<T> {
+    data:T,
+    status:number,
+    error:boolean,
+    errorMessage:string
+};
+
+export const get = async <T>(endpoint:string, auth:Auth|null=null):Promise<ApiResponse<T>> => {
     const headers:any = {
         'Content-Type': 'application/json'
     };
@@ -12,22 +19,29 @@ export const get = async <T>(endpoint:string, auth:Auth|null=null):Promise<T> =>
         headers: headers
     });
     const json = await response.json();
-    return json as T;
+    return {
+        data: json as T,
+        status: response.status,
+        error: response.status !== 200,
+        errorMessage: json.hasOwnProperty("message") ? json.message as string : response.statusText
+    };
 }
 
-export const post = async <T>(endpoint:string, body:any, auth:Auth|null=null):Promise<T> => {
+export const post = async <T>(endpoint:string, body:any, auth:Auth|null=null):Promise<ApiResponse<T>> => {
     const headers:any = {
         'Content-Type': 'application/json'
     };
     if (auth?.token) headers['Authorization'] = `token ${auth.token}`;
-    return fetch(`${API_URL}${endpoint}`,{
+    const response = await fetch(`${API_URL}${endpoint}`,{
         method: 'POST',
         headers: headers,
         body: JSON.stringify(body)
-    })
-    .then(res => res.json())
-    .then(data => {
-        if(data.hasOwnProperty("message")) throw new Error(data.message);
-        return data
     });
+    const json = await response.json();
+    return {
+        data: json as T,
+        status: response.status,
+        error: response.status !== 200,
+        errorMessage: json.hasOwnProperty("message") ? json.message as string : response.statusText
+    };
 }

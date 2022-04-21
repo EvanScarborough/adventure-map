@@ -29,11 +29,16 @@ const RegisterPage = ({ login }:RegisterPageProps) => {
         }
         const request:RegisterRequest = { email:email, displayName:name, password:password };
         post<Auth>("/user", request)
-            .then(data => {
-                login(data);
-                navigate("/");
+            .then(response => {
+                if (!response.error) {
+                    login(response.data);
+                    navigate("/");
+                }
+                else {
+                    setWarning(response.errorMessage)
+                }
             })
-            .catch(err => setWarning(err.message));
+            .catch(err => setWarning("Something went wrong."));
     }
 
     return(

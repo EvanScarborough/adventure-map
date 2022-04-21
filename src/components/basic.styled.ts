@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const DottedDivider = styled.div`
+interface DottedDividerProps {
+    centeringMargin?:number
+};
+export const DottedDivider = styled.div<DottedDividerProps>`
     height: 1px;
     width: calc(100% - 60px);
     border-top: dotted 6px ${props => props.theme.color.primary.main};
+    ${props => props.centeringMargin ? "margin-left: 30px;" : ""}
 `;
 
 export const StyledLink = styled(Link)`
@@ -28,4 +32,10 @@ export const BannerArea = styled.div`
     & > svg {
         margin-left: ${props => props.theme.margin.med};
     }
+`;
+
+export const RowLayout = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `;

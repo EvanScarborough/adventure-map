@@ -23,11 +23,16 @@ const LoginPage = ({ login }:LoginPageProps) => {
         e.preventDefault();
         const request:LoginRequest = { email:email, password:password };
         post<Auth>("/auth/login", request)
-            .then(data => {
-                login(data);
-                navigate("/");
+            .then(response => {
+                if (!response.error) {
+                    login(response.data);
+                    navigate("/");
+                }
+                else {
+                    setWarning(response.errorMessage)
+                }
             })
-            .catch(err => setWarning(err.message));
+            .catch(err => setWarning("Something went wrong."));
     }
 
     return(
