@@ -6,8 +6,8 @@ import { Form, Label, TextInput, ButtonInput } from "../../components/form.style
 import { FancyHeader, Body } from "../../components/typography.styled";
 import { DottedDivider, StyledLink } from "../../components/basic.styled";
 import { post } from "../../api/api";
-import Banner from "../../components/Banner.component";
 import { useNavigate } from "react-router-dom";
+import Banner from "../../components/Banner.component";
 
 interface LoginPageProps {
     login:(auth:Auth)=>void

@@ -39,3 +39,27 @@ export const RowLayout = styled.div`
     flex-direction: row;
     align-items: center;
 `;
+
+
+interface RatingAreaProps {
+    size:number
+};
+export const RatingArea = styled.div<RatingAreaProps>`
+    height: ${props => props.size}px;
+    max-height: ${props => props.size}px;
+`;
+interface RatingOverlayAreaProps {
+    size:number,
+    rating:number
+};
+export const RatingOverlayArea = styled.div<RatingOverlayAreaProps>`
+    position: relative;
+    overflow: hidden;
+    top: -${props => props.size}px;
+    height: ${props => props.size}px;
+    width: ${props => props.size * props.rating}px;
+`;
+export const RatingOverlayAreaInner = styled.div<RatingAreaProps>`
+    height: ${props => props.size}px;
+    width: ${props => props.size * 10}px;
+`;
