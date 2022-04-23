@@ -17,8 +17,8 @@ const LocationCard = ({ location }:LocationCardProps) => {
             <LocationCardBodyArea>
                 <SmallTitle margin="0">{location.name}</SmallTitle>
                 <RowLayout>
-                    <Rating rating={4.5}/>
-                    <SmallNote padding="0 0 0 20px" color="#ccc">
+                    <Rating rating={location.rating}/>
+                    <SmallNote padding="0 0 0 16px" color="#ccc">
                         {location.myAdventureCount > 0 ? `${location.myAdventureCount} Adventures` : "No Adventures Yet"}
                     </SmallNote>
                 </RowLayout>

@@ -79,12 +79,45 @@ export const ShowControlPanelButton = styled.button<ShowControlPanelButtonProps>
     left: ${props => props.show ? "calc(100% - 60px)" : "100%"};
     z-index: 1001;
     border: none;
+    outline: none;
     border-radius: ${props => props.show ? "8px" : "0 8px 8px 0"};
     background-color: white;
     width: 50px;
     height: 50px;
-    box-shadow: ${props => props.show ? "0 0 6px rgba(0,0,0,0.2)" : "0 0 12px rgba(0,0,0,0.5)"};
+    box-shadow: ${props => props.show ? "0 2px 6px rgba(0,0,0,0.2)" : "0 0 12px rgba(0,0,0,0.5)"};
     transition: box-shadow 0.2s, left 0.2s;
+    cursor: pointer;
+`;
+
+export const AddLocationButton = styled.button`
+    position: absolute;
+    height: 60px;
+    width: calc(100% - 30px);
+    bottom: 10px;
+    left: 15px;
+    z-index: 1001;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-size: 1.3em;
+    background-color: ${props => props.theme.color.primary.main};
+    color: ${props => props.theme.color.primary.contrast};
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+    text-transform: uppercase;
+    transform: translatey(0);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    &:focus, &:hover {
+        background-color: ${props => props.theme.color.primary.dark};
+        box-shadow: ${props => props.theme.shadow.small};
+        transform: translatey(-2px);
+        outline: none;
+    }
+    &:active {
+        background-color: ${props => props.theme.color.primary.dark};
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+        transform: translatey(0);
+    }
 `;
 
 interface SideControlPanelProps {
@@ -101,6 +134,11 @@ export const SideControlPanel = styled.div<SideControlPanelProps>`
     background-color: white;
     box-shadow: 0 0 12px rgba(0,0,0,0.5);
     transition: left 0.2s;
+`;
+export const SideControlScrollArea = styled.div`
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
 `;
 
 export const CardHolderArea = styled.div`
@@ -119,7 +157,7 @@ export const LocationCardArea = styled.div`
     background-color: white;
     border-radius: 8px;
     transform: translateY(0);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     transition: transform 0.5s ease, box-shadow 0.5s;
     transition-timing-function: cubic-bezier(0.595, 0.005, 0.295, 1.650);
     cursor: pointer;

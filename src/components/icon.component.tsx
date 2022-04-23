@@ -32,7 +32,7 @@ const Icon = ({ type, color, size, index, setOver, hover }: IconProps) => {
         style:{
             transform:`scale(${hover ? "1.2" : "1"})`,
             transition:"transform 0.1s",
-            cursor:setOver?"pointer":"auto"
+            cursor:setOver?"pointer":"inherit"
         }
     };
     return React.createElement(icons[type], props);
