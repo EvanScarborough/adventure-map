@@ -34,10 +34,14 @@ export const BannerArea = styled.div`
     }
 `;
 
-export const RowLayout = styled.div`
+interface RowLayoutProps {
+    margin?:string
+};
+export const RowLayout = styled.div<RowLayoutProps>`
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: ${props => props.margin ?? "0"};
 `;
 
 
@@ -47,6 +51,7 @@ interface RatingAreaProps {
 export const RatingArea = styled.div<RatingAreaProps>`
     height: ${props => props.size}px;
     max-height: ${props => props.size}px;
+    min-width: ${props => props.size * 5}px;
 `;
 interface RatingOverlayAreaProps {
     size:number,
@@ -55,7 +60,7 @@ interface RatingOverlayAreaProps {
 export const RatingOverlayArea = styled.div<RatingOverlayAreaProps>`
     position: relative;
     overflow: hidden;
-    top: -${props => props.size}px;
+    top: -${props => props.size * 1.08}px;
     height: ${props => props.size}px;
     width: ${props => props.size * props.rating}px;
 `;

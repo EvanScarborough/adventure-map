@@ -6,6 +6,11 @@ export const theme = {
             dark: "#dde9ea",
             contrast: "#000"
         },
+        gray: {
+            main: "#aaa",
+            light: "#ccc",
+            dark: "#888"
+        },
         primary: {
             main: "#57827a",
             light: "#819f9a",

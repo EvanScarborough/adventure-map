@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { LocationType } from "../../types/location-type";
 import { MARKER_SIZE } from "./components/map/map-style";
 
-const locationTypeMapping:Record<LocationType,string> = {
+export const locationTypeMapping:Record<LocationType,string> = {
     "Restaurant":"#d04621",
     "Shopping":"#51bfab",
     "Experience":"#fcce41",
@@ -30,7 +30,7 @@ export const MarkerDot = styled.div<MarkerDotProps>`
     height: ${MARKER_SIZE-4}px;
     min-width: ${MARKER_SIZE-4}px;
     min-height: ${MARKER_SIZE-4}px;
-    background-color: ${props => props.adventureCount ? locationTypeMapping[props.locationType] : "#fff"};
+    background-color: ${props => props.adventureCount ? locationTypeMapping[props.locationType] : "white"};
     border: solid 2px ${props => props.adventureCount ? "white" : locationTypeMapping[props.locationType]};
     border-radius: 12px;
     box-shadow: inset -2px -2px 8px rgba(0,0,0,0.3), 2px 6px 3px rgba(0,0,0,0.2);
@@ -107,12 +107,46 @@ export const CardHolderArea = styled.div`
     display: flex;
     flex-direction: column;
     margin: 20px;
+    margin-left: 26px;
 `;
 
 export const LocationCardArea = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
     width: 100%;
     margin: 4px 0;
     background-color: white;
     border-radius: 8px;
+    transform: translateY(0);
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease, box-shadow 0.5s;
+    transition-timing-function: cubic-bezier(0.595, 0.005, 0.295, 1.650);
+    cursor: pointer;
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+    }
+`;
+interface LocationCardMarkerAreaProps {
+    locationType:LocationType,
+    adventureCount:number
+};
+export const LocationCardMarkerArea = styled.div<LocationCardMarkerAreaProps>`
+    display: flex;
+    align-items: center;
+    background-color: ${props => props.adventureCount ? locationTypeMapping[props.locationType] : "#eee"};
+    border-radius: 8px 0 0 8px;
+    border-right: solid 3px ${props => props.adventureCount ? "#ccc" : locationTypeMapping[props.locationType]};
+    & > div {
+        margin: 0;
+        margin-left: -12px;
+        margin-right: 6px;
+    }
+`;
+export const LocationCardBodyArea = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 8px;
 `;

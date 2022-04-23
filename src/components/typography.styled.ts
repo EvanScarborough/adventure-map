@@ -34,7 +34,7 @@ export const Body = styled.p<TypographyProps>`
 `;
 
 export const SmallNote = styled.p<TypographyProps>`
-    color: ${props => props.inheritColor ? "inherit" : props.theme.color.primary.light};
+    color: ${props => props.inheritColor ? "inherit" : props.theme.color.gray.main};
     font-size: 1em;
     text-align: ${props => props.center ? "center" : "left"};
     margin: ${props => props.margin ?? "10px 0"};
