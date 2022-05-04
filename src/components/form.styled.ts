@@ -9,11 +9,17 @@ export const Form = styled.form`
     margin-top: ${props => props.theme.margin.med};
 `;
 
+interface InputProps {
+    limitWidth?:number;
+};
+
 export const Label = styled.label`
 
 `;
 
-export const TextInput = styled.input`
+export const TextInput = styled.input<InputProps>`
+    ${props => props.limitWidth ?
+        "width: calc(100% - 120px);" : ""}
     padding: ${props => props.theme.margin.small};
     margin: ${props => props.theme.margin.small} 0 ${props => props.theme.margin.med} 0;
     border: solid ${props => props.theme.border.width} ${props => props.theme.color.primary.main};

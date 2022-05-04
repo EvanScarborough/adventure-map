@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { get, post } from '../../../api/api';
-import AuthContext from '../../../hooks/auth-context';
-import { Location } from '../../../types/location';
+import { get, post } from '../api/api';
+import AuthContext from './auth-context';
+import { Location } from '../types/location';
 
 const useLocations = () => {
     const auth = React.useContext(AuthContext);

@@ -5,12 +5,14 @@ import LocationCard from "./location-card.component";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FancyHeader } from "../../../../components/typography.styled";
 import { DottedDivider } from "../../../../components/basic.styled";
+import { useNavigate } from "react-router-dom";
 
 interface CardAreaProps {
     locations:Location[]
 };
 const CardArea = ({ locations }:CardAreaProps) => {
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
     return (
         <SideControlPanel show={show ? 1 : 0}>
             <ShowControlPanelButton
@@ -25,8 +27,10 @@ const CardArea = ({ locations }:CardAreaProps) => {
                     {locations.map(l => <LocationCard key={l.locationId} location={l}/>)}
                 </CardHolderArea>
             </SideControlScrollArea>
-            <AddLocationButton>
-                Add Location
+            <AddLocationButton
+                onClick={() => navigate("/new-adventure")}
+                >
+                New Adventure
             </AddLocationButton>
         </SideControlPanel>
     )
