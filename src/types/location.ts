@@ -23,3 +23,25 @@ export interface Location {
     adventureCount:number,
     myAdventureCount:number
 };
+
+export const getBlankLocation = (): Location => {
+    return {
+        locationId: 0,
+        name: "",
+        description: "",
+        locationType: "Experience",
+        addressLine1: "",
+        city: "",
+        state: "",
+        country: "",
+        latitude: 0,
+        longitude: 0,
+        addedByUser: { userId: 0, displayName: "" },
+        addedAtTime: new Date(),
+        isPrivate: false,
+        rating: 0,
+        myRating: 0,
+        adventureCount: 0,
+        myAdventureCount: 0
+    };
+};

@@ -10,6 +10,7 @@ export const LocationInputArea = styled.div`
 
 export const SuggestionArea = styled.div`
     position: absolute;
+    z-index: 100;
     width: calc(100% - 120px);
     max-width: 680px;
     background-color: ${props => props.theme.color.base.main};
@@ -27,4 +28,9 @@ export const Suggestion = styled.div`
     &:hover {
         background-color: ${props => props.theme.color.primary.wash};
     }
+`;
+
+export const ConfirmMapHolder = styled.div`
+    width: calc(100% - 60px);
+    height: 400px;
 `;

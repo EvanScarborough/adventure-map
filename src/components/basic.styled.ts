@@ -103,3 +103,30 @@ export const RatingOverlayAreaInner = styled.div<RatingAreaProps>`
     height: ${props => props.size}px;
     width: ${props => props.size * 10}px;
 `;
+
+export const Button = styled.button`
+    margin: ${props => props.theme.margin.small} ${props => props.theme.margin.large};
+    padding: ${props => props.theme.margin.small};
+    border-radius: ${props => props.theme.border.radius.small};
+    font-size: 1.3em;
+    background-color: ${props => props.theme.color.primary.main};
+    color: ${props => props.theme.color.primary.contrast};
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    transform: translatey(0);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    &:focus, &:hover {
+        background-color: ${props => props.theme.color.primary.dark};
+        box-shadow: ${props => props.theme.shadow.small};
+        transform: translatey(-2px);
+        outline: none;
+    }
+    &:active {
+        background-color: ${props => props.theme.color.primary.dark};
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+        transform: translatey(0);
+    }
+`;

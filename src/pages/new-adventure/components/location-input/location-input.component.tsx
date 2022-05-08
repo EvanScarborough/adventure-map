@@ -2,10 +2,11 @@ import { useState } from 'react';
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
+    Suggestion as GoogleSuggestion
 } from 'react-places-autocomplete';
 import { TextInput } from '../../../../components/form.styled';
-import { SmallNote, SmallTitle } from '../../../../components/typography.styled';
-import { Location } from '../../../../types/location';
+import { SectionHeader, SmallNote } from '../../../../components/typography.styled';
+import { getBlankLocation, Location } from '../../../../types/location';
 import { LocationInputArea, Suggestion, SuggestionArea } from '../../new-adventure.styled';
 
 const getMatchRank = (location: Location, filter: string): number => {
@@ -26,10 +27,46 @@ const filterLocations = (locations: Location[], filter: string): Location[] => {
 };
 
 interface LocationInputProps {
-    locations: Location[]
+    locations: Location[],
+    selectLocation(location: Location):void
 };
-const LocationInput = ({ locations }: LocationInputProps) => {
+const LocationInput = ({ locations, selectLocation }: LocationInputProps) => {
     const [address, setAddress] = useState("");
+
+    const selectExisting = (location: Location) => {
+        setAddress(location.name);
+        selectLocation(location);
+    }
+    const selectGoogle = (location: GoogleSuggestion) => {
+        setAddress(location.description);
+        geocodeByAddress(location.description)
+            .then(results => {
+                console.log(results);
+                getLatLng(results[0])
+                    .then(latLng => {
+                        selectLocation({
+                            ...getBlankLocation(),
+                            locationId: -1,
+                            latitude: latLng.lat,
+                            longitude: latLng.lng,
+                            name: location.description,
+                            addressLine1: results[0].address_components
+                                .filter(c => c.types.find(t => t === "street_number" || t === "route"))
+                                .join(' '),
+                            addressLine2: results[0].address_components
+                                .filter(c => c.types.find(t => t === "subpremise"))
+                                .join(' '),
+                            neighborhood: results[0].address_components.find(c => c.types.find(t => t === "neighborhood"))?.short_name ?? "",
+                            city: results[0].address_components.find(c => c.types.find(t => t === "locality"))?.short_name ?? "",
+                            state: results[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1"))?.short_name ?? "",
+                            country: results[0].address_components.find(c => c.types.find(t => t === "country"))?.short_name ?? "",
+                            zipCode: results[0].address_components.find(c => c.types.find(t => t === "postal_code"))?.long_name ?? ""
+                        });
+                    })
+                    .catch(error => console.error('Error', error));
+            })
+            .catch(error => console.error('Error', error));
+    }
 
     return (
         <PlacesAutocomplete
@@ -38,7 +75,7 @@ const LocationInput = ({ locations }: LocationInputProps) => {
         >
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
             <>
-                <SmallTitle>Where was this Adventure?</SmallTitle>
+                <SectionHeader>Where was this Adventure?</SectionHeader>
                 <TextInput
                     placeholder="Search Locations"
                     limitWidth={1}
@@ -48,12 +85,25 @@ const LocationInput = ({ locations }: LocationInputProps) => {
                     {(address !== "" && (loading || (suggestions !== null && suggestions.length > 0))) && <SuggestionArea>
                         {
                             filterLocations(locations, address).map((l,i) =>
-                                <Suggestion key={i}>{l.name}</Suggestion>)
+                                <Suggestion {...getSuggestionItemProps({
+                                    id: l.locationId.toString(),
+                                    active: true,
+                                    index: i,
+                                    description: l.name,
+                                    placeId: l.locationId.toString(),
+                                    formattedSuggestion: {
+                                        mainText: l.name,
+                                        secondaryText: l.addressLine1
+                                    },
+                                    matchedSubstrings: [],
+                                    terms: [],
+                                    types: []
+                                })} key={l.locationId} onClick={()=>selectExisting(l)}>{l.name}</Suggestion>)
                         }
-                        {(suggestions !== null && suggestions.length > 0) && <SmallNote padding='0 0 0 6px'>Google Suggestions</SmallNote>}
+                        {(suggestions !== null && suggestions.length > 0) && <SmallNote key={-1} padding='0 0 0 6px'>Google Suggestions</SmallNote>}
                         {
-                            suggestions.map((s,i) => 
-                                <Suggestion key={s.id}>{s.description}</Suggestion>)
+                            suggestions.map((s) => 
+                                <Suggestion {...getSuggestionItemProps(s)} key={s.id} onClick={()=>selectGoogle(s)}>{s.description}</Suggestion>)
                         }
                     </SuggestionArea>}
                 </LocationInputArea>
