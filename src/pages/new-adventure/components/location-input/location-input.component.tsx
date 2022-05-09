@@ -50,11 +50,17 @@ const LocationInput = ({ locations, selectLocation }: LocationInputProps) => {
                             latitude: latLng.lat,
                             longitude: latLng.lng,
                             name: location.description,
+                            locationType: results[0].types.find(t => t === "restaurant" || t === "food" || t === "bar")
+                                ? "Restaurant" :
+                                results[0].types.find(t => t === "store")
+                                ? "Shopping" : "Experience",
                             addressLine1: results[0].address_components
                                 .filter(c => c.types.find(t => t === "street_number" || t === "route"))
+                                .map(c => c.long_name)
                                 .join(' '),
                             addressLine2: results[0].address_components
                                 .filter(c => c.types.find(t => t === "subpremise"))
+                                .map(c => c.long_name)
                                 .join(' '),
                             neighborhood: results[0].address_components.find(c => c.types.find(t => t === "neighborhood"))?.short_name ?? "",
                             city: results[0].address_components.find(c => c.types.find(t => t === "locality"))?.short_name ?? "",

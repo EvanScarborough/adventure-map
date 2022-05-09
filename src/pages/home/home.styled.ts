@@ -22,17 +22,18 @@ export const MarkerArea = styled.div<MarkerAreaProps>`
 interface MarkerDotProps {
     locationType:LocationType,
     adventureCount:number,
-    displaySimple?:number
+    displaySimple?:number,
+    large?:number
 };
 export const MarkerDot = styled.div<MarkerDotProps>`
     ${props => props.displaySimple ? "" : "position: absolute;"}
-    width: ${MARKER_SIZE-4}px;
-    height: ${MARKER_SIZE-4}px;
-    min-width: ${MARKER_SIZE-4}px;
-    min-height: ${MARKER_SIZE-4}px;
+    width: ${props => props.large ? 40 : MARKER_SIZE-4}px;
+    height: ${props => props.large ? 40 : MARKER_SIZE-4}px;
+    min-width: ${props => props.large ? 40 : MARKER_SIZE-4}px;
+    min-height: ${props => props.large ? 40 : MARKER_SIZE-4}px;
     background-color: ${props => props.adventureCount ? locationTypeMapping[props.locationType] : "white"};
-    border: solid 2px ${props => props.adventureCount ? "white" : locationTypeMapping[props.locationType]};
-    border-radius: 12px;
+    border: solid ${props => props.large ? 4 : 2}px ${props => props.adventureCount ? "white" : locationTypeMapping[props.locationType]};
+    border-radius: ${props => props.large ? 24 : 12}px;
     box-shadow: inset -2px -2px 8px rgba(0,0,0,0.3), 2px 6px 3px rgba(0,0,0,0.2);
     ${props => props.displaySimple ? "margin: 8px;" : "cursor: pointer;"}
 `;

@@ -104,7 +104,11 @@ export const RatingOverlayAreaInner = styled.div<RatingAreaProps>`
     width: ${props => props.size * 10}px;
 `;
 
-export const Button = styled.button`
+interface ButtonProps {
+    width?: string
+};
+export const Button = styled.button<ButtonProps>`
+    ${props => props.width ? `width: ${props.width};` : ""}
     margin: ${props => props.theme.margin.small} ${props => props.theme.margin.large};
     padding: ${props => props.theme.margin.small};
     border-radius: ${props => props.theme.border.radius.small};

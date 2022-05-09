@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { get, post } from '../api/api';
 import AuthContext from './auth-context';
 import { Location } from '../types/location';
+import NewLocationRequest from '../types/requests/new-location-request';
 
 const useLocations = () => {
     const auth = React.useContext(AuthContext);
@@ -12,7 +13,7 @@ const useLocations = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (auth){
+        if (auth) {
             get<Location[]>('/location', auth)
                 .then(response => {
                     if (!response.error) {
@@ -31,9 +32,26 @@ const useLocations = () => {
         }
     }, [auth?.userId]);
 
+    const addLocation = (request: NewLocationRequest): Promise<Location|void> => {
+        return post<Location>('/location', request, auth)
+            .then(response => {
+                if (!response.error) {
+                    setLocations([...locations, response.data]);
+                }
+                else {
+                    setErrorMessage(response.errorMessage);
+                }
+                return response.data;
+            })
+            .catch(e => {
+                setErrorMessage("Something went wrong.");
+            });
+    };
+
     return {
         locations: locations,
-        errorMessage: errorMessage
+        errorMessage: errorMessage,
+        addLocation: addLocation
     };
 };
 
