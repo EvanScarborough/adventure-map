@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { RowLayout } from "../../../../components/basic.styled";
 import Rating from "../../../../components/rating.component";
 import { Body, SmallNote, SmallTitle } from "../../../../components/typography.styled";
@@ -9,8 +10,10 @@ interface LocationCardProps {
     location:Location
 };
 const LocationCard = ({ location }:LocationCardProps) => {
+    const navigate = useNavigate();
+
     return (
-        <LocationCardArea>
+        <LocationCardArea onClick={() => navigate(`/location/${location.locationId}`)}>
             <LocationCardMarkerArea locationType={location.locationType} adventureCount={location.myAdventureCount}>
                 <MarkerDot locationType={location.locationType} adventureCount={location.myAdventureCount} displaySimple={1}/>
             </LocationCardMarkerArea>

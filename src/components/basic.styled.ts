@@ -134,3 +134,14 @@ export const Button = styled.button<ButtonProps>`
         transform: translatey(0);
     }
 `;
+
+interface SpacerProps {
+    height?: string,
+    width?: string,
+    margin?: string,
+};
+export const Spacer = styled.div<SpacerProps>`
+    ${props => props.height ? `height: ${props.height};` : ""}
+    ${props => props.width ? `width: ${props.width};` : ""}
+    ${props => props.margin ? `margin: ${props.margin};` : ""}
+`;

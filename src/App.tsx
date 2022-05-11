@@ -12,6 +12,7 @@ import RegisterPage from './pages/login/register.component';
 import Auth from './types/auth';
 import AuthContext from './hooks/auth-context';
 import NewAdventurePage from './pages/new-adventure/new-adventure.component';
+import LocationPage from './pages/location/location.component';
 
 const AUTH_LOCALSTORAGE_KEY = "auth";
 
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="/login" element={<LoginPage login={login} />} />
             <Route path="/register" element={<RegisterPage login={login} />} />
             <Route path="/new-adventure" element={<NewAdventurePage />} />
+            <Route path="/location/:locationId" element={<LocationPage />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </Router>
