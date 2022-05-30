@@ -15,19 +15,26 @@ export const BackgroundArea = styled.div`
     top: 0;
     left: 0;
     z-index: 1;
-    background-image: url("topomap.jpeg");
+    background-image: url("/topomap.jpeg");
     background-size: cover;
     filter: blur(8px);
     -webkit-filter: blur(8px);
 `;
 
-export const MainArea = styled.div`
+interface MainAreaProps {
+    hardLimitHeight?: number
+};
+export const MainArea = styled.div<MainAreaProps>`
     z-index: 100;
     width: calc(100% - 48px);
     margin: 48px 0;
     padding-top: 20px;
     max-width: 800px;
     min-height: calc(100vh - 116px);
+    ${props => props.hardLimitHeight ?
+        `height: calc(100vh - 116px);
+         max-height: calc(100vh - 116px);`
+        : ""}
     background-color: ${props => props.theme.color.base.main};
     border-radius: ${props => props.theme.border.radius.large};
     box-shadow: ${props => props.theme.shadow.large};
@@ -76,6 +83,28 @@ export const RowLayout = styled.div<RowLayoutProps>`
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: ${props => props.margin ?? "0"};
+`;
+
+interface ColumnLayoutProps {
+    margin?:string
+};
+export const ColumnLayout = styled.div<ColumnLayoutProps>`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: ${props => props.margin ?? "0"};
+`;
+
+interface CollectionLayoutProps {
+    margin?:string
+};
+export const CollectionLayout = styled.div<CollectionLayoutProps>`
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     margin: ${props => props.margin ?? "0"};
 `;
 
@@ -133,6 +162,12 @@ export const Button = styled.button<ButtonProps>`
         box-shadow: 0 0 0 rgba(0,0,0,0);
         transform: translatey(0);
     }
+    &:disabled, &[disabled] {
+        background-color: #ccc;
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+        transform: translatey(0);
+        cursor: auto;
+    }
 `;
 
 interface SpacerProps {
@@ -144,4 +179,70 @@ export const Spacer = styled.div<SpacerProps>`
     ${props => props.height ? `height: ${props.height};` : ""}
     ${props => props.width ? `width: ${props.width};` : ""}
     ${props => props.margin ? `margin: ${props.margin};` : ""}
+`;
+
+export const PaginationArea = styled.div`
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+`;
+interface PaginationAreaInnerProps {
+    pageCount: number,
+    pageOn: number
+};
+export const PaginationAreaInner = styled.div<PaginationAreaInnerProps>`
+    position: relative;
+    left: -${props => props.pageOn * 100}%;
+    width: ${props => props.pageCount * 100}%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(${props => props.pageCount}, ${props => 100 / props.pageCount}%);
+    grid-template-rows: 100%;
+    transition: left 0.5s;
+`;
+interface PaginationPageProps {
+    visible: number
+};
+export const PaginationPage = styled.div<PaginationPageProps>`
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    opacity: ${props => props.visible ? 1 : 0};
+    transition: opacity 0.5s;
+`;
+
+export const UserBadgeImage = styled.div`
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    background: rgb(224,152,52);
+    background: linear-gradient(137deg, rgba(224,152,52,1) 0%, rgba(66,173,238,1) 77%, rgba(0,212,255,1) 100%);
+    border-radius: 16px;
+`;
+
+export const ChipContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: ${props => props.theme.padding.small} ${props => props.theme.padding.med};
+    margin: 4px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 100px;
+    &:hover > button {
+        background-color: rgba(255,255,255,1);
+    }
+`;
+export const ChipXButton = styled.button`
+    background-color: rgba(255,255,255,0);
+    outline: none;
+    border: none;
+    width: 20px;
+    height: 20px;
+    padding: 4px 0 0 0;
+    margin-left: 8px;
+    margin-right: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 `;

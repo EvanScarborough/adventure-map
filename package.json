@@ -16,12 +16,15 @@
     "env-cmd": "^10.1.0",
     "google-map-react": "^2.1.10",
     "react": "^17.0.2",
+    "react-date-picker": "^8.4.0",
     "react-dom": "^17.0.2",
+    "react-dropzone": "^14.2.1",
     "react-icons": "^4.3.1",
     "react-loading-skeleton": "^3.1.0",
     "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "react-time-picker": "^4.5.0",
     "styled-components": "^5.3.3",
     "typescript": "^4.6.2",
     "web-vitals": "^2.1.4"
@@ -54,6 +57,7 @@
   "devDependencies": {
     "@types/google-map-react": "^2.1.5",
     "@types/react-places-autocomplete": "^7.2.9",
+    "@types/react-time-picker": "^4.0.2",
     "@types/styled-components": "^5.1.24"
   }
 }

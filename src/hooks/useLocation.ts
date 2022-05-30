@@ -7,7 +7,6 @@ import AuthContext from "./auth-context";
 
 const useLocation = (locationId: number) => {
     const auth = React.useContext(AuthContext);
-    console.log(auth);
     const [location, setLocation] = useState<Location|null>(null);
     const [errorMessage, setErrorMessage] = useState<string|null>(null);
 
