@@ -6,12 +6,12 @@ import Pagination from "../../components/pagination.component";
 import RatingInput from "../../components/rating-input.component";
 import { FancyHeader, SectionHeader, SmallNote } from "../../components/typography.styled";
 import useLocation from "../../hooks/useLocation";
-import {useDropzone} from 'react-dropzone';
 import NewAdventureRequest from "../../types/requests/new-adventure-request";
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import Chip from "../../components/chip.component";
 import UserBadge from "../../components/user-badge.component";
+import ImageUploader from "../../components/image-uploader.component";
 
 const getDateComponentMs = (time: Date): number => {
     return new Date(
@@ -31,11 +31,6 @@ const timeStringToMs = (time: string): number => {
 const LocationNewAdventurePage = () => {
     const { locationId } = useParams();
     const { location } = useLocation(+(locationId as string));
-
-    const onDropImage = (acceptedFiles:any) => {
-
-    };
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop:onDropImage});
 
     const [pageOn, setPageOn] = useState(0);
     const [pageAllow, setPageAllow] = useState(1);
@@ -124,14 +119,7 @@ const LocationNewAdventurePage = () => {
                         <SectionHeader>
                             Add some images of your adventure.
                         </SectionHeader>
-                        <div {...getRootProps()}>
-                            <input {...getInputProps()} />
-                            {
-                                isDragActive ?
-                                <p>Drop image here!</p> :
-                                <p>Drag and drop images here, or click to select files</p>
-                            }
-                        </div>
+                        <ImageUploader />
                     </ColumnLayout>
                     {/* Other Members */}
                     <ColumnLayout>

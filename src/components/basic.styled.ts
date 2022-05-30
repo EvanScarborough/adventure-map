@@ -87,6 +87,7 @@ export const RowLayout = styled.div<RowLayoutProps>`
 `;
 
 interface ColumnLayoutProps {
+    width?:string,
     margin?:string
 };
 export const ColumnLayout = styled.div<ColumnLayoutProps>`
@@ -94,6 +95,7 @@ export const ColumnLayout = styled.div<ColumnLayoutProps>`
     flex-direction: column;
     align-items: center;
     margin: ${props => props.margin ?? "0"};
+    ${props => props.width ? `width: ${props.width};` : ""}
 `;
 
 interface CollectionLayoutProps {
@@ -245,4 +247,31 @@ export const ChipXButton = styled.button`
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.2s;
+`;
+
+interface ImageUploadAreaProps {
+    dragOver: number
+};
+export const ImageUploadArea = styled.div<ImageUploadAreaProps>`
+    width: 100%;
+    border: dashed 2px ${props => props.dragOver ? props.theme.color.primary.light : "#aaa"};
+    border-radius: 8px;
+    background-color: ${props => props.dragOver ? props.theme.color.primary.wash : "white"};
+    text-align: center;
+    color: ${props => props.dragOver ? props.theme.color.primary.light : "#aaa"};
+    padding: 24px 0;
+`;
+export const ImageUploadInput = styled.input``;
+export const ImagePreviewHolder = styled.button`
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border: none;
+    background: none;
+`;
+export const ImagePreview = styled.img`
+    width: 100%;
 `;
