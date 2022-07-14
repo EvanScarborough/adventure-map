@@ -43,7 +43,13 @@ const LocationPage = () => {
                                 adventures
                                 ?
                                     <ColumnLayout>
-                                        {adventures.map((a,i) => <AdventureCard key={i} adventure={a}/>)}
+                                        {
+                                            adventures.length === 0
+                                            ?
+                                                <SmallNote>No Adventures Yet!</SmallNote>
+                                            :
+                                                adventures.map((a,i) => <AdventureCard key={i} adventure={a}/>)
+                                        }
                                     </ColumnLayout>
                                 :
                                     <Skeleton height="4em" count={3} />

@@ -1,5 +1,7 @@
+import { CollectionLayout } from "../../../components/basic.styled";
 import Rating from "../../../components/rating.component";
 import { SectionHeader, SmallNote } from "../../../components/typography.styled";
+import UserBadge from "../../../components/user-badge.component";
 import { Adventure } from "../../../types/adventure";
 import { AdventureCardArea, CenterAligner } from "../location.styled";
 import AdventureMemberComment from "./adventure-member-comment.component";
@@ -23,7 +25,9 @@ const AdventureCard = ({ adventure }: { adventure: Adventure }) => {
             </CenterAligner>
             <AdventureMemberComment adventureMember={primaryMember} />
             {otherMembers.map((m,i) => <AdventureMemberComment key={i} adventureMember={m} />)}
-            {pendingMembers.map((m,i) => <AdventureMemberComment key={i} adventureMember={m} />)}
+            <CollectionLayout left={1} spacing="4px">
+                {pendingMembers.map((m,i) => <UserBadge key={i} user={m.user} small imageOnly />)}
+            </CollectionLayout>
         </AdventureCardArea>
     );
 };

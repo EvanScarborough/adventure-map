@@ -5,14 +5,21 @@ import { Body } from "./typography.styled";
 
 interface UserBadgeProps {
     user: User,
-    imageOnly?: boolean
+    imageOnly?: boolean,
+    small?: boolean
 };
-const UserBadge = ({ user, imageOnly }: UserBadgeProps) => {
+const UserBadge = ({ user, imageOnly, small }: UserBadgeProps) => {
     if (imageOnly) {
         return (
             <div>
                 <a data-tip data-for={`user-badge-${user.userId}`}>
-                    <LargeUserBadgeImage/>
+                    {
+                        small
+                        ?
+                            <UserBadgeImage/>
+                        :
+                            <LargeUserBadgeImage/>
+                    }
                 </a>
                 <ReactTooltip id={`user-badge-${user.userId}`} effect='solid'>
                     <span>{user.displayName}</span>

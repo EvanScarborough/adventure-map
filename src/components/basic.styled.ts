@@ -99,15 +99,22 @@ export const ColumnLayout = styled.div<ColumnLayoutProps>`
 `;
 
 interface CollectionLayoutProps {
-    margin?:string
+    margin?:string,
+    left?:number,
+    spacing?:string
 };
 export const CollectionLayout = styled.div<CollectionLayoutProps>`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: ${props => props.left ? 'flex-start' : 'center'};
     margin: ${props => props.margin ?? "0"};
+    ${props => props.spacing ? `
+        & > * {
+            margin: ${props.spacing};
+        }
+    ` : ''}
 `;
 
 
