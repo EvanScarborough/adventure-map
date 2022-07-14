@@ -1,11 +1,25 @@
+import ReactTooltip from "react-tooltip";
 import { User } from "../types/user";
-import { RowLayout, UserBadgeImage } from "./basic.styled";
+import { LargeUserBadgeImage, RowLayout, UserBadgeImage } from "./basic.styled";
 import { Body } from "./typography.styled";
 
 interface UserBadgeProps {
-    user: User
+    user: User,
+    imageOnly?: boolean
 };
-const UserBadge = ({ user }: UserBadgeProps) => {
+const UserBadge = ({ user, imageOnly }: UserBadgeProps) => {
+    if (imageOnly) {
+        return (
+            <div>
+                <a data-tip data-for={`user-badge-${user.userId}`}>
+                    <LargeUserBadgeImage/>
+                </a>
+                <ReactTooltip id={`user-badge-${user.userId}`} effect='solid'>
+                    <span>{user.displayName}</span>
+                </ReactTooltip>
+            </div>
+        );
+    }
     return (
         <RowLayout>
             <UserBadgeImage/>

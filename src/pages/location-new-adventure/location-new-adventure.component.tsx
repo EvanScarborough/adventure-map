@@ -61,7 +61,7 @@ const LocationNewAdventurePage = () => {
     const handleNextButton = () => {
         if (pageOn === 4) postAdventure(adventure)
             .then(res => {
-                navigate(`/location/${adventure.locationId}/adventure/${(res as Adventure).adventureId}`);
+                navigate(`/location/${adventure.locationId}`);
             })
             .catch(err => console.log(err));
         else setPageOn(pageOn + 1);

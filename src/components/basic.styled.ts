@@ -222,6 +222,15 @@ export const UserBadgeImage = styled.div`
     background: linear-gradient(137deg, rgba(224,152,52,1) 0%, rgba(66,173,238,1) 77%, rgba(0,212,255,1) 100%);
     border-radius: 16px;
 `;
+export const LargeUserBadgeImage = styled.div`
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    background: rgb(224,152,52);
+    background: linear-gradient(137deg, rgba(224,152,52,1) 0%, rgba(66,173,238,1) 77%, rgba(0,212,255,1) 100%);
+    border-radius: 32px;
+`;
 
 export const ChipContainer = styled.div`
     display: flex;

@@ -6,11 +6,12 @@ import { Body, SectionHeader, SmallNote, Title } from "../../components/typograp
 import { LocationBodyArea, LocationHeroArea, LocationTitleArea } from "./location.styled";
 import { MarkerDot } from "../home/home.styled";
 import Rating from "../../components/rating.component";
-import { Button, Spacer } from "../../components/basic.styled";
+import { Button, ColumnLayout, Spacer } from "../../components/basic.styled";
+import AdventureCard from "./components/adventure-card.component";
 
 const LocationPage = () => {
     const { locationId } = useParams();
-    const { location } = useLocation(+(locationId as string));
+    const { location, adventures, errorMessage } = useLocation(+(locationId as string));
 
     const navigate = useNavigate();
 
@@ -38,6 +39,15 @@ const LocationPage = () => {
                             <Body>{location.description}</Body>
                             <SectionHeader margin="48px 0 0 0">Adventures</SectionHeader>
                             <Button onClick={() => navigate(`new-adventure`)}>Add Adventure</Button>
+                            {
+                                adventures
+                                ?
+                                    <ColumnLayout>
+                                        {adventures.map((a,i) => <AdventureCard key={i} adventure={a}/>)}
+                                    </ColumnLayout>
+                                :
+                                    <Skeleton height="4em" count={3} />
+                            }
                         </>
                     :
                         <>
@@ -46,6 +56,7 @@ const LocationPage = () => {
                             <SectionHeader margin="32px 0 0 0">About</SectionHeader>
                             <Skeleton height="0.8em" count={3} />
                             <SectionHeader margin="48px 0 0 0">Adventures</SectionHeader>
+                            <Skeleton height="4em" count={3} />
                         </>
                 }
             </LocationBodyArea>
