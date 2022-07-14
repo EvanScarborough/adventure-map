@@ -1,17 +1,23 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BackgroundArea, Button, CollectionLayout, ColumnLayout, DottedDivider, MainArea, PageArea, RowLayout } from "../../components/basic.styled";
-import { TextArea } from "../../components/form.styled";
+import { TextArea, TextInput } from "../../components/form.styled";
 import Pagination from "../../components/pagination.component";
 import RatingInput from "../../components/rating-input.component";
 import { FancyHeader, SectionHeader, SmallNote } from "../../components/typography.styled";
 import useLocation from "../../hooks/useLocation";
+import useUsers from "../../hooks/useUsers";
 import NewAdventureRequest from "../../types/requests/new-adventure-request";
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import Chip from "../../components/chip.component";
 import UserBadge from "../../components/user-badge.component";
 import ImageUploader from "../../components/image-uploader.component";
+import { SearchResultsPopupArea, SearchResultsPopupContainer, SearchResultSuggestion } from "./location-new-adventure.styled";
+import AuthContext from "../../hooks/auth-context";
+import React from "react";
+import usePostAdventure from "./hooks/usePostAdventure";
+import { Adventure } from "../../types/adventure";
 
 const getDateComponentMs = (time: Date): number => {
     return new Date(
@@ -31,6 +37,8 @@ const timeStringToMs = (time: string): number => {
 const LocationNewAdventurePage = () => {
     const { locationId } = useParams();
     const { location } = useLocation(+(locationId as string));
+    const { users } = useUsers();
+    const auth = React.useContext(AuthContext);
 
     const [pageOn, setPageOn] = useState(0);
     const [pageAllow, setPageAllow] = useState(1);
@@ -38,11 +46,26 @@ const LocationNewAdventurePage = () => {
         locationId: +(locationId as string),
         time: new Date(),
         description: "",
-        members: [{userId:1,displayName:"Evan"},{userId:1,displayName:"Evan"},{userId:1,displayName:"Evan"},{userId:1,displayName:"Evan"},{userId:1,displayName:"Evan"},{userId:1,displayName:"Evan"},{userId:1,displayName:"Evan"}],
+        members: [],
         isPrivate: false,
         rating: 0,
         comment: ""
     });
+    const [userSearch, setUserSearch] = useState("");
+
+    const navigate = useNavigate();
+    if (!auth) navigate("/login");
+
+    const postAdventure = usePostAdventure();
+
+    const handleNextButton = () => {
+        if (pageOn === 4) postAdventure(adventure)
+            .then(res => {
+                navigate(`/location/${adventure.locationId}/adventure/${(res as Adventure).adventureId}`);
+            })
+            .catch(err => console.log(err));
+        else setPageOn(pageOn + 1);
+    };
 
     return (
         <PageArea>
@@ -129,10 +152,37 @@ const LocationNewAdventurePage = () => {
                         <SmallNote padding="0 32px" center={1}>
                             These people will be notified and asked to add their own reviews the next time they log in.
                         </SmallNote>
+                        <TextInput 
+                            limitWidth={1}
+                            value={userSearch}
+                            onChange={e => setUserSearch(e.target.value)}
+                        />
+                        {
+                            userSearch !== "" &&
+                            <SearchResultsPopupContainer>
+                                <SearchResultsPopupArea>
+                                    {
+                                        users.filter(u => auth?.userId !== u.userId
+                                            && !adventure.members.find(m => m.userId === u.userId)
+                                            && u.displayName.toLowerCase().search(userSearch.toLowerCase()) >= 0)
+                                            .map(u => <SearchResultSuggestion
+                                                key={u.userId}
+                                                onClick={() => {
+                                                    const newMembers = adventure.members;
+                                                    newMembers.push(u);
+                                                    setAdventure({...adventure, members:newMembers});
+                                                    setUserSearch("");
+                                                }}>
+                                                    <UserBadge user={u} />
+                                                </SearchResultSuggestion>)
+                                    }
+                                </SearchResultsPopupArea>
+                            </SearchResultsPopupContainer>
+                        }
                         <CollectionLayout>
                             { adventure.members.map((m,i) => 
                                 <Chip key={i} onPressX={() => {
-                                        setAdventure({ ...adventure, members:adventure.members.splice(i,1) });
+                                        setAdventure({ ...adventure, members:adventure.members.filter((_,fi)=>i!==fi) });
                                     }}>
                                     <UserBadge user={m}/>
                                 </Chip>
@@ -142,7 +192,7 @@ const LocationNewAdventurePage = () => {
                 </Pagination>
                 <RowLayout>
                     <Button disabled={pageOn <= 0} onClick={()=>setPageOn(pageOn-1)}>Back</Button>
-                    <Button disabled={pageAllow <= pageOn} onClick={()=>setPageOn(pageOn+1)}>
+                    <Button disabled={pageAllow <= pageOn} onClick={()=>handleNextButton()}>
                         { pageOn === 4 ? "Submit" : "Next" }
                     </Button>
                 </RowLayout>
