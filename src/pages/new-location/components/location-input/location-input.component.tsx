@@ -7,7 +7,7 @@ import PlacesAutocomplete, {
 import { TextInput } from '../../../../components/form.styled';
 import { SectionHeader, SmallNote } from '../../../../components/typography.styled';
 import { getBlankLocation, Location } from '../../../../types/location';
-import { LocationInputArea, Suggestion, SuggestionArea } from '../../new-adventure.styled';
+import { LocationInputArea, Suggestion, SuggestionArea } from '../../new-location.styled';
 
 const getMatchRank = (location: Location, filter: string): number => {
     const lcName = location.name.toLowerCase();

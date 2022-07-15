@@ -11,7 +11,7 @@ import { buildNewLocationRequest } from "../../types/requests/new-location-reque
 import { MarkerDot } from "../home/home.styled";
 import { LocationType } from "../../types/location-type";
 
-const NewAdventurePage = () => {
+const NewLocationPage = () => {
     const { locations, addLocation } = useLocations();
     const [selectedLocation, setSelectedLocation] = useState<Location|null>(null);
     const [locationConfirmed, setLocationConfirmed] = useState(false);
@@ -43,7 +43,7 @@ const NewAdventurePage = () => {
                                     <ConfirmMap lat={selectedLocation.latitude} lng={selectedLocation.longitude} />
                                     <Button onClick={() => {
                                         if (selectedLocation.locationId >= 0) {
-                                            navigate(`/location/${selectedLocation.locationId}/new-adventure`);
+                                            navigate(`/location/${selectedLocation.locationId}`);
                                         }
                                         else {
                                             setLocationConfirmed(true);
@@ -104,4 +104,4 @@ const NewAdventurePage = () => {
     );
 };
 
-export default NewAdventurePage;
+export default NewLocationPage;

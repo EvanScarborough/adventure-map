@@ -11,7 +11,7 @@ import LoginPage from './pages/login/login.component';
 import RegisterPage from './pages/login/register.component';
 import Auth from './types/auth';
 import AuthContext from './hooks/auth-context';
-import NewAdventurePage from './pages/new-adventure/new-adventure.component';
+import NewLocationPage from './pages/new-location/new-location.component';
 import LocationPage from './pages/location/location.component';
 import LocationNewAdventurePage from './pages/location-new-adventure/location-new-adventure.component';
 
@@ -43,7 +43,7 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<LoginPage login={login} />} />
             <Route path="/register" element={<RegisterPage login={login} />} />
-            <Route path="/new-adventure" element={<NewAdventurePage />} />
+            <Route path="/new-location" element={<NewLocationPage />} />
             <Route path="/location/:locationId/new-adventure" element={<LocationNewAdventurePage />} />
             <Route path="/location/:locationId" element={<LocationPage />} />
             <Route path="/" element={<HomePage />} />

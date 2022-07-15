@@ -28,9 +28,9 @@ const CardArea = ({ locations }:CardAreaProps) => {
                 </CardHolderArea>
             </SideControlScrollArea>
             <AddLocationButton
-                onClick={() => navigate("/new-adventure")}
+                onClick={() => navigate("/new-location")}
                 >
-                New Adventure
+                Add Location
             </AddLocationButton>
         </SideControlPanel>
     )

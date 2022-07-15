@@ -143,7 +143,8 @@ export const RatingOverlayAreaInner = styled.div<RatingAreaProps>`
 `;
 
 interface ButtonProps {
-    width?: string
+    width?: string,
+    cancel?: number
 };
 export const Button = styled.button<ButtonProps>`
     ${props => props.width ? `width: ${props.width};` : ""}
@@ -151,8 +152,8 @@ export const Button = styled.button<ButtonProps>`
     padding: ${props => props.theme.margin.small};
     border-radius: ${props => props.theme.border.radius.small};
     font-size: 1.3em;
-    background-color: ${props => props.theme.color.primary.main};
-    color: ${props => props.theme.color.primary.contrast};
+    background-color: ${props => props.cancel ? props.theme.color.gray.dark : props.theme.color.primary.main};
+    color: ${props => props.cancel ? "#fff" : props.theme.color.primary.contrast};
     outline: none;
     border: none;
     text-transform: uppercase;
@@ -161,7 +162,7 @@ export const Button = styled.button<ButtonProps>`
     transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
     cursor: pointer;
     &:focus, &:hover {
-        background-color: ${props => props.theme.color.primary.dark};
+        background-color: ${props => props.cancel ? props.theme.color.error.dark : props.theme.color.primary.dark};
         box-shadow: ${props => props.theme.shadow.small};
         transform: translatey(-2px);
         outline: none;

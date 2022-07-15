@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from '../../../home/components/map/marker.component';
 import style, { MARKER_SIZE } from '../../../home/components/map/map-style';
-import { ConfirmMapHolder } from '../../new-adventure.styled';
+import { ConfirmMapHolder } from '../../new-location.styled';
 import { SectionHeader } from '../../../../components/typography.styled';
 
 interface ConfirmMapProps {

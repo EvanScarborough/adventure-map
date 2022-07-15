@@ -58,6 +58,10 @@ const LocationNewAdventurePage = () => {
 
     const postAdventure = usePostAdventure();
 
+    const handleBackButton = () => {
+        if (pageOn === 0) navigate(`/location/${adventure.locationId}`);
+        else setPageOn(pageOn-1);
+    };
     const handleNextButton = () => {
         if (pageOn === 4) postAdventure(adventure)
             .then(res => {
@@ -191,7 +195,9 @@ const LocationNewAdventurePage = () => {
                     </ColumnLayout>
                 </Pagination>
                 <RowLayout>
-                    <Button disabled={pageOn <= 0} onClick={()=>setPageOn(pageOn-1)}>Back</Button>
+                    <Button cancel={pageOn === 0 ? 1 : 0} onClick={()=>handleBackButton()}>
+                        { pageOn === 0 ? "Cancel" : "Back" }
+                    </Button>
                     <Button disabled={pageAllow <= pageOn} onClick={()=>handleNextButton()}>
                         { pageOn === 4 ? "Submit" : "Next" }
                     </Button>
