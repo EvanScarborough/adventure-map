@@ -226,18 +226,42 @@ export const UserBadgeImage = styled.div`
     height: 32px;
     min-width: 32px;
     min-height: 32px;
-    background: rgb(224,152,52);
-    background: linear-gradient(137deg, rgba(224,152,52,1) 0%, rgba(66,173,238,1) 77%, rgba(0,212,255,1) 100%);
     border-radius: 16px;
+    & > img, & > div {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        border-radius: 16px;
+    }
 `;
 export const LargeUserBadgeImage = styled.div`
     width: 64px;
     height: 64px;
     min-width: 64px;
     min-height: 64px;
-    background: rgb(224,152,52);
-    background: linear-gradient(137deg, rgba(224,152,52,1) 0%, rgba(66,173,238,1) 77%, rgba(0,212,255,1) 100%);
     border-radius: 32px;
+    & > img, & > div {
+        width: 64px;
+        height: 64px;
+        min-width: 64px;
+        min-height: 64px;
+        border-radius: 32px;
+        font-size: 30px;
+    }
+`;
+export interface MissingImageProfileProps {
+    color: string
+};
+export const MissingImageProfile = styled.div<MissingImageProfileProps>`
+    background-color: ${props => props.color};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+export const MissingImageProfileText = styled.h2`
+    color: rgba(255,255,255,0.5);
+    font-size: inherit;
 `;
 
 export const ChipContainer = styled.div`
@@ -291,4 +315,18 @@ export const ImagePreviewHolder = styled.button`
 `;
 export const ImagePreview = styled.img`
     width: 100%;
+`;
+
+export const ProfileButtonHolder = styled.button`
+    position: fixed;
+    z-index: 1000;
+    top: 10px;
+    right: 10px;
+    padding: ${props => props.theme.margin.small};
+    border-radius: 50%;
+    background-color: ${props => props.theme.color.base.main};
+    outline: none;
+    border: none;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    cursor: pointer;
 `;

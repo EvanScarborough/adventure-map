@@ -7,5 +7,6 @@ export interface AdventureMember {
     rating: number,
     comment: string,
     isPrivate: boolean,
-    isCompleted: boolean
+    isCompleted: boolean,
+    imageUrls: string[]
 };

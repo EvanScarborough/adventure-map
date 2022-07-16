@@ -8,6 +8,7 @@ import { MarkerDot } from "../home/home.styled";
 import Rating from "../../components/rating.component";
 import { Button, ColumnLayout, Spacer } from "../../components/basic.styled";
 import AdventureCard from "./components/adventure-card.component";
+import ProfileButton from "../../components/profile-button.component";
 
 const LocationPage = () => {
     const { locationId } = useParams();
@@ -17,6 +18,7 @@ const LocationPage = () => {
 
     return (
         <>
+            <ProfileButton />
             <LocationHeroArea>
                 <LocationTitleArea>
                     <MarkerDot 

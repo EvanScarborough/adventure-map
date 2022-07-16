@@ -5,5 +5,6 @@ export default interface Auth {
     displayName:string,
     email:string,
     role:UserRole,
+    profilePictureUrl?:string|null,
     token:string
 };

@@ -18,7 +18,8 @@ const Map = ({ locations }: MapProps) => {
                 defaultCenter={{lat,lng}}
                 defaultZoom={13}
                 options={{
-                    styles: style
+                    styles: style,
+                    fullscreenControl: false
                 }}
                 hoverDistance={MARKER_SIZE / 2}
                 onDragEnd={e => console.log(e)}
