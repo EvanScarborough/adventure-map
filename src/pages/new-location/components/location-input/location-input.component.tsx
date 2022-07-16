@@ -12,8 +12,8 @@ import { LocationInputArea, Suggestion, SuggestionArea } from '../../new-locatio
 const getMatchRank = (location: Location, filter: string): number => {
     const lcName = location.name.toLowerCase();
     const lcFilter = filter.toLowerCase();
-    if (lcName.toLowerCase().startsWith(lcFilter)) return 9000 + location.adventureCount;
-    if (lcName.toLowerCase().indexOf(lcFilter) >= 0) return 8000 + location.adventureCount;
+    if (lcName.toLowerCase().startsWith(lcFilter)) return 9000 + (location.adventureCount ?? 0);
+    if (lcName.toLowerCase().indexOf(lcFilter) >= 0) return 8000 + (location.adventureCount ?? 0);
     return 0;
 };
 const filterLocations = (locations: Location[], filter: string): Location[] => {

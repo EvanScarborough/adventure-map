@@ -15,13 +15,13 @@ export interface Location {
     neighborhood?:string,
     latitude:number,
     longitude:number,
-    addedByUser:User,
-    addedAtTime:Date,
+    addedByUser?:User,
+    addedAtTime?:Date,
     isPrivate:boolean,
-    rating:number,
-    myRating:number,
-    adventureCount:number,
-    myAdventureCount:number
+    rating?:number,
+    myRating?:number,
+    adventureCount?:number,
+    myAdventureCount?:number
 };
 
 export const getBlankLocation = (): Location => {

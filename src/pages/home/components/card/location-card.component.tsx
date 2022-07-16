@@ -14,15 +14,15 @@ const LocationCard = ({ location }:LocationCardProps) => {
 
     return (
         <LocationCardArea onClick={() => navigate(`/location/${location.locationId}`)}>
-            <LocationCardMarkerArea locationType={location.locationType} adventureCount={location.myAdventureCount}>
-                <MarkerDot locationType={location.locationType} adventureCount={location.myAdventureCount} displaySimple={1}/>
+            <LocationCardMarkerArea locationType={location.locationType} adventureCount={location.myAdventureCount ?? 0}>
+                <MarkerDot locationType={location.locationType} adventureCount={location.myAdventureCount ?? 0} displaySimple={1}/>
             </LocationCardMarkerArea>
             <LocationCardBodyArea>
                 <SmallTitle margin="0">{location.name}</SmallTitle>
                 <RowLayout>
-                    <Rating rating={location.rating}/>
+                    <Rating rating={location.rating ?? 0}/>
                     <SmallNote padding="0 0 0 16px" color="#ccc">
-                        {location.myAdventureCount > 0 ? `${location.myAdventureCount} Adventures` : "No Adventures Yet"}
+                        {(location.myAdventureCount ?? 0) > 0 ? `${location.myAdventureCount} Adventures` : "No Adventures Yet"}
                     </SmallNote>
                 </RowLayout>
                 <Body margin="0">{location.description}</Body>

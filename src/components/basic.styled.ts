@@ -250,6 +250,21 @@ export const LargeUserBadgeImage = styled.div`
         font-size: 30px;
     }
 `;
+export const HugeUserBadgeImage = styled.div`
+    width: 256px;
+    height: 256px;
+    min-width: 256px;
+    min-height: 256px;
+    border-radius: 128px;
+    & > img, & > div {
+        width: 256px;
+        height: 256px;
+        min-width: 256px;
+        min-height: 256px;
+        border-radius: 128px;
+        font-size: 120px;
+    }
+`;
 export interface MissingImageProfileProps {
     color: string
 };
@@ -262,6 +277,7 @@ export const MissingImageProfile = styled.div<MissingImageProfileProps>`
 export const MissingImageProfileText = styled.h2`
     color: rgba(255,255,255,0.5);
     font-size: inherit;
+    user-select: none;
 `;
 
 export const ChipContainer = styled.div`

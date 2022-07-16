@@ -14,6 +14,7 @@ import AuthContext from './hooks/auth-context';
 import NewLocationPage from './pages/new-location/new-location.component';
 import LocationPage from './pages/location/location.component';
 import LocationNewAdventurePage from './pages/location-new-adventure/location-new-adventure.component';
+import UserPage from './pages/user/user.component';
 
 const AUTH_LOCALSTORAGE_KEY = "auth";
 
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/new-location" element={<NewLocationPage />} />
             <Route path="/location/:locationId/new-adventure" element={<LocationNewAdventurePage />} />
             <Route path="/location/:locationId" element={<LocationPage />} />
+            <Route path="/user/:userId" element={<UserPage />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </Router>

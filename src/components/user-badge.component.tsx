@@ -1,11 +1,11 @@
 import ReactTooltip from "react-tooltip";
 import { User } from "../types/user";
-import { LargeUserBadgeImage, MissingImageProfile, MissingImageProfileText, RowLayout, UserBadgeImage } from "./basic.styled";
+import { HugeUserBadgeImage, LargeUserBadgeImage, MissingImageProfile, MissingImageProfileText, RowLayout, UserBadgeImage } from "./basic.styled";
 import { Body } from "./typography.styled";
 import anonymousImage from "../images/anonymous.png";
 
-const missingImageColors = ["#c4cc31","#97c232","#708a34","#45a361","#5fc7a6","#1b8765","#239e98","#4ea1ad","#19484f",
-"#1f5480","#425180","#61508a","#4d345e","#805382","#8f577d","#803751","#b05464","#bf3232","#c4512b","#c4822b","#e8c61a"];
+const missingImageColors = ["#708a34","#45a361","#5fc7a6","#1b8765","#239e98","#4ea1ad","#19484f","#1f5480","#97c232",
+"#425180","#61508a","#4d345e","#805382","#8f577d","#803751","#b05464","#bf3232","#c4512b","#c4822b","#e8c61a","#c4cc31"];
 
 const UserImage = ({ user }: { user: User|null }) => {
     if (!user) return <img src={anonymousImage}/>;
@@ -13,7 +13,7 @@ const UserImage = ({ user }: { user: User|null }) => {
         var abriv = "";
         if (user.displayName.length <= 2) abriv = user.displayName.toUpperCase();
         else {
-            abriv = user.displayName.split(' ').map(w => w.length > 0 ? w[0] : '').join();
+            abriv = user.displayName.split(' ').map(w => w.length > 0 ? w[0] : '').join('').toUpperCase();
         }
         return <MissingImageProfile color={missingImageColors[user.userId % missingImageColors.length]}>
             <MissingImageProfileText>{abriv}</MissingImageProfileText>
@@ -26,9 +26,10 @@ interface UserBadgeProps {
     user: User|null,
     imageOnly?: boolean,
     small?: boolean,
-    hideTooltip?: boolean
+    hideTooltip?: boolean,
+    huge?: boolean
 };
-const UserBadge = ({ user, imageOnly, small, hideTooltip }: UserBadgeProps) => {
+const UserBadge = ({ user, imageOnly, small, hideTooltip, huge }: UserBadgeProps) => {
     if (imageOnly) {
         return (
             <div>
@@ -40,9 +41,15 @@ const UserBadge = ({ user, imageOnly, small, hideTooltip }: UserBadgeProps) => {
                                 <UserImage user={user}/>
                             </UserBadgeImage>
                         :
-                            <LargeUserBadgeImage>
-                                <UserImage user={user}/>
-                            </LargeUserBadgeImage>
+                            huge
+                            ?
+                                <HugeUserBadgeImage>
+                                    <UserImage user={user}/>
+                                </HugeUserBadgeImage>
+                            :
+                                <LargeUserBadgeImage>
+                                    <UserImage user={user}/>
+                                </LargeUserBadgeImage>
                     }
                 </a>
                 {
