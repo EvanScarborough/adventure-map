@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { get } from "../api/api";
+import { get, post, postFile } from "../api/api";
+import { PreviewFile } from "../components/image-uploader.component";
 import { UserDetails } from "../types/responses/user-details";
+import { User } from "../types/user";
 import AuthContext from "./auth-context";
 
 const useUser = (userId: number) => {
@@ -23,9 +25,14 @@ const useUser = (userId: number) => {
             });
     }, [auth?.userId]);
 
+    const postProfilePic = (file: PreviewFile) => {
+        return postFile<User>('/user/profilepic', file, auth);
+    };
+
     return {
         user: user,
-        errorMessage: errorMessage
+        errorMessage: errorMessage,
+        postProfilePic
     };
 };
 

@@ -12,7 +12,7 @@ import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import Chip from "../../components/chip.component";
 import UserBadge from "../../components/user-badge.component";
-import ImageUploader from "../../components/image-uploader.component";
+import ImageUploader, { PreviewFile } from "../../components/image-uploader.component";
 import { SearchResultsPopupArea, SearchResultsPopupContainer, SearchResultSuggestion } from "./location-new-adventure.styled";
 import AuthContext from "../../hooks/auth-context";
 import React from "react";
@@ -52,6 +52,7 @@ const LocationNewAdventurePage = () => {
         comment: ""
     });
     const [userSearch, setUserSearch] = useState("");
+    const [files, setFiles] = useState<PreviewFile[]>([]);
 
     const navigate = useNavigate();
     if (!auth) navigate("/login");
@@ -146,7 +147,7 @@ const LocationNewAdventurePage = () => {
                         <SectionHeader>
                             Add some images of your adventure.
                         </SectionHeader>
-                        <ImageUploader />
+                        <ImageUploader files={files} setFiles={setFiles}/>
                     </ColumnLayout>
                     {/* Other Members */}
                     <ColumnLayout>

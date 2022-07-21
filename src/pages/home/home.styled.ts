@@ -160,7 +160,7 @@ export const LocationCardArea = styled.div`
     transform: translateY(0);
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     transition: transform 0.5s ease, box-shadow 0.5s;
-    transition-timing-function: cubic-bezier(0.595, 0.005, 0.295, 1.650);
+    transition-timing-function: ${props => props.theme.transition.smallbounce};
     cursor: pointer;
     &:hover {
         transform: translateY(-4px);

@@ -2,27 +2,35 @@ import { useEffect, useState } from "react";
 import { CollectionLayout, ColumnLayout, ImagePreview, ImagePreviewHolder, ImageUploadArea, ImageUploadInput } from "./basic.styled";
 import {useDropzone} from 'react-dropzone';
 
-interface PreviewFile extends File {
-    preview: string
+export interface PreviewFile {
+    preview: string,
+    file: File
 };
 
-const ImageUploader = () => {
-    const maxFiles = 3;
-    const [files, setFiles] = useState<PreviewFile[]>([]);
+interface ImageUploaderProps {
+    files: PreviewFile[],
+    setFiles: (files: PreviewFile[]) => void,
+    maxFiles?: number,
+    width?: string
+};
+const ImageUploader = ({ files, setFiles, maxFiles, width }: ImageUploaderProps) => {
+    const maxFileCount = maxFiles ?? 3;
+
     const onDropImage = (acceptedFiles:File[]) => {
-        if (files.length >= maxFiles) return;
+        if (files.length >= maxFileCount) return;
         setFiles([...files, ...acceptedFiles.map((file:File) => {return {
-            ...file,
-            preview: URL.createObjectURL(file)
+            preview: URL.createObjectURL(file),
+            file: file
         }})]);
     };
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone(
         {
             onDrop:onDropImage,
             accept: {
                 'image/*': ['.jpeg', '.png']
             },
-            maxFiles: maxFiles
+            maxFiles: maxFileCount
         }
     );
 
@@ -32,21 +40,24 @@ const ImageUploader = () => {
     }, []);
 
     return (
-        <ColumnLayout width="calc(100% - 60px)">
-            <ImageUploadArea {...getRootProps()} dragOver={isDragActive && files.length < maxFiles ? 1 : 0}>
-                <ImageUploadInput {...getInputProps()} />
-                {
-                    files.length >= maxFiles
-                    ?
-                        <p>Maximum files reached. Click images below to remove.</p>
-                    :
-                        isDragActive
+        <ColumnLayout width={width ?? "calc(100% - 60px)"}>
+            {
+                (maxFileCount > 1 || files.length === 0) &&
+                <ImageUploadArea {...getRootProps()} dragOver={isDragActive && files.length < maxFileCount ? 1 : 0}>
+                    <ImageUploadInput {...getInputProps()} />
+                    {
+                        files.length >= maxFileCount
                         ?
-                            <p>Drop image here!</p>
+                            <p>Maximum files reached. Click images below to remove.</p>
                         :
-                            <p>Drag and drop images here, or click to select files</p>
-                }
-            </ImageUploadArea>
+                            isDragActive
+                            ?
+                                <p>Drop image here!</p>
+                            :
+                                <p>Drag and drop images here, or click to select files</p>
+                    }
+                </ImageUploadArea>
+            }
             <CollectionLayout>
                 {files.map((f,i) => <ImagePreviewHolder
                     key={i}

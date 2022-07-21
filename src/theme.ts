@@ -56,5 +56,8 @@ export const theme = {
     },
     font: {
         standout: "actonia, Brush Script MT, Brush Script Std, cursive"
+    },
+    transition: {
+        smallbounce: "cubic-bezier(0.595, 0.005, 0.295, 1.650)"
     }
 };

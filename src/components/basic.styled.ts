@@ -77,13 +77,15 @@ export const BannerArea = styled.div`
 `;
 
 interface RowLayoutProps {
-    margin?:string
+    margin?:string,
+    space?:number
 };
 export const RowLayout = styled.div<RowLayoutProps>`
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: ${props => props.margin ?? "0"};
+    ${props => props.space ? "justify-content: space-between;" : ""}
 `;
 
 interface ColumnLayoutProps {
@@ -345,4 +347,62 @@ export const ProfileButtonHolder = styled.button`
     border: none;
     box-shadow: 0 0 12px rgba(0,0,0,0.5);
     cursor: pointer;
+`;
+
+interface ScreenBackgroundAreaProps {
+    show: number
+};
+export const ScreenBackgroundArea = styled.div<ScreenBackgroundAreaProps>`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,${props => props.show ? '0.5' : '0'});
+    backdrop-filter: blur(${props => props.show ? '8px' : '0px'});
+    transition: background-color 0.3s, backdrop-filter 0.3s;
+    pointer-events: ${props => props.show ? 'auto' : 'none'};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+interface ModalAreaProps {
+    show: number,
+    width?: string,
+    height?: string
+};
+export const ModalArea = styled.div<ModalAreaProps>`
+    background-color: ${props => props.theme.color.base.main};
+    min-width: 100px;
+    min-height: 100px;
+    ${props => props.width ? `width: ${props.width};` : ''}
+    ${props => props.height ? `height: ${props.height};` : ''}
+    max-width: calc(100vw - 120px);
+    max-height: calc(100vh - 120px);
+    border-radius: ${props => props.theme.border.radius.large};
+    padding: ${props => props.theme.padding.medlarge};
+    transform: scale(${props => props.show ? '1' : '0'},${props => props.show ? '1' : '0'});
+    transition: transform 0.3s;
+    transition-timing-function: ${props => props.show ? props.theme.transition.smallbounce : 'ease'};
+    pointer-events: ${props => props.show ? 'auto' : 'none'};
+    overflow: scroll;
+`;
+
+export const BoxButton = styled.button`
+    border: none;
+    outline: none;
+    border-radius: ${props => props.theme.border.radius.med};
+    background-color: ${props => props.theme.color.base.main};
+    width: 50px;
+    height: 50px;
+    box-shadow: ${props => props.theme.shadow.small};
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease, box-shadow 0.5s;
+    transition-timing-function: ${props => props.theme.transition.smallbounce};
+    cursor: pointer;
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+    }
 `;

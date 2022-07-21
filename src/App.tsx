@@ -31,9 +31,9 @@ const App = () => {
     catch(err) { /* nbd just log in again */ }
   }, []);
 
-  const login = (auth:Auth) => {
+  const login = (auth:Auth|null) => {
     console.log(auth);
-    localStorage.setItem(AUTH_LOCALSTORAGE_KEY, JSON.stringify(auth));
+    localStorage.setItem(AUTH_LOCALSTORAGE_KEY, auth ? JSON.stringify(auth) : '');
     setAuth(auth);
   };
 
@@ -47,7 +47,7 @@ const App = () => {
             <Route path="/new-location" element={<NewLocationPage />} />
             <Route path="/location/:locationId/new-adventure" element={<LocationNewAdventurePage />} />
             <Route path="/location/:locationId" element={<LocationPage />} />
-            <Route path="/user/:userId" element={<UserPage />} />
+            <Route path="/user/:userId" element={<UserPage login={login} />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </Router>
