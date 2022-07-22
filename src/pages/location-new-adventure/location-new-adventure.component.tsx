@@ -18,6 +18,7 @@ import AuthContext from "../../hooks/auth-context";
 import React from "react";
 import usePostAdventure from "./hooks/usePostAdventure";
 import { Adventure } from "../../types/adventure";
+import ReactLoading from 'react-loading';
 
 const getDateComponentMs = (time: Date): number => {
     return new Date(
@@ -53,6 +54,7 @@ const LocationNewAdventurePage = () => {
     });
     const [userSearch, setUserSearch] = useState("");
     const [files, setFiles] = useState<PreviewFile[]>([]);
+    const [uploading, setUploading] = useState(false);
 
     const navigate = useNavigate();
     if (!auth) navigate("/login");
@@ -64,11 +66,15 @@ const LocationNewAdventurePage = () => {
         else setPageOn(pageOn-1);
     };
     const handleNextButton = () => {
-        if (pageOn === 4) postAdventure(adventure)
-            .then(res => {
-                navigate(`/location/${adventure.locationId}`);
-            })
-            .catch(err => console.log(err));
+        if (pageOn === 4) {
+            setUploading(true);
+            postAdventure(adventure, files)
+                .then(res => {
+                    navigate(`/location/${adventure.locationId}`);
+                })
+                .catch(err => console.log(err))
+                .finally(() => setUploading(false));
+        }
         else setPageOn(pageOn + 1);
     };
 
@@ -195,14 +201,20 @@ const LocationNewAdventurePage = () => {
                         </CollectionLayout>
                     </ColumnLayout>
                 </Pagination>
-                <RowLayout>
-                    <Button cancel={pageOn === 0 ? 1 : 0} onClick={()=>handleBackButton()}>
-                        { pageOn === 0 ? "Cancel" : "Back" }
-                    </Button>
-                    <Button disabled={pageAllow <= pageOn} onClick={()=>handleNextButton()}>
-                        { pageOn === 4 ? "Submit" : "Next" }
-                    </Button>
-                </RowLayout>
+                {
+                    uploading
+                    ?
+                        <ReactLoading color="#ccc" type="bars" />
+                    :
+                        <RowLayout>
+                            <Button cancel={pageOn === 0 ? 1 : 0} onClick={()=>handleBackButton()}>
+                                { pageOn === 0 ? "Cancel" : "Back" }
+                            </Button>
+                            <Button disabled={pageAllow <= pageOn} onClick={()=>handleNextButton()}>
+                                { pageOn === 4 ? "Submit" : "Next" }
+                            </Button>
+                        </RowLayout>
+                }
             </MainArea>
         </PageArea>
     );

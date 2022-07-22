@@ -69,7 +69,7 @@ const UserBadge = ({ user, imageOnly, small, hideTooltip, huge }: UserBadgeProps
             <UserBadgeImage>
                 <UserImage user={user}/>
             </UserBadgeImage>
-            <Body padding="0 0 0 8px">{user?.userId ?? 'anon'}</Body>
+            <Body padding="0 0 0 8px">{user?.displayName ?? 'Anonymous'}</Body>
         </RowLayout>
     );
 };

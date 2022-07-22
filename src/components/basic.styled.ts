@@ -328,8 +328,13 @@ export const ImagePreviewHolder = styled.button`
     align-items: center;
     justify-content: center;
     outline: none;
-    border: none;
+    border: solid 1px #ccc;
+    border-radius: ${props => props.theme.border.radius.small};
     background: none;
+    overflow: hidden;
+    padding: 0;
+    margin: 8px;
+    cursor: pointer;
 `;
 export const ImagePreview = styled.img`
     width: 100%;

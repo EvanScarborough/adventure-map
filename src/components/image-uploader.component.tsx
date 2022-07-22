@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CollectionLayout, ColumnLayout, ImagePreview, ImagePreviewHolder, ImageUploadArea, ImageUploadInput } from "./basic.styled";
 import {useDropzone} from 'react-dropzone';
+import { SmallNote } from "./typography.styled";
 
 export interface PreviewFile {
     preview: string,
@@ -48,7 +49,7 @@ const ImageUploader = ({ files, setFiles, maxFiles, width }: ImageUploaderProps)
                     {
                         files.length >= maxFileCount
                         ?
-                            <p>Maximum files reached. Click images below to remove.</p>
+                            <p>Maximum files reached</p>
                         :
                             isDragActive
                             ?
@@ -58,11 +59,11 @@ const ImageUploader = ({ files, setFiles, maxFiles, width }: ImageUploaderProps)
                     }
                 </ImageUploadArea>
             }
+            { files.length > 0 && <SmallNote>Click on images to remove them</SmallNote>}
             <CollectionLayout>
                 {files.map((f,i) => <ImagePreviewHolder
                     key={i}
                     onClick={() => {
-                        console.log("remove",i);
                         setFiles(files.filter((_,fi) => fi != i));
                         URL.revokeObjectURL(f.preview);
                     }}
