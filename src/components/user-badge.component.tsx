@@ -1,6 +1,6 @@
 import ReactTooltip from "react-tooltip";
 import { User } from "../types/user";
-import { HugeUserBadgeImage, LargeUserBadgeImage, MissingImageProfile, MissingImageProfileText, RowLayout, UserBadgeImage } from "./basic.styled";
+import { HugeUserBadgeImage, LargeUserBadgeImage, MissingImageProfile, MissingImageProfileText, RowLayout, UserBadgeHolder, UserBadgeImage } from "./basic.styled";
 import { Body } from "./typography.styled";
 import anonymousImage from "../images/anonymous.png";
 
@@ -32,8 +32,9 @@ interface UserBadgeProps {
 const UserBadge = ({ user, imageOnly, small, hideTooltip, huge }: UserBadgeProps) => {
     if (imageOnly) {
         return (
-            <div>
-                <a data-tip={hideTooltip ? false : true} data-for={`user-badge-${user?.userId ?? 'anon'}`}>
+            <UserBadgeHolder>
+                <a data-tip={hideTooltip ? false : true} data-for={`user-badge-${user?.userId ?? 'anon'}`}
+                    href={`/user/${user?.userId}`}>
                     {
                         small
                         ?
@@ -61,16 +62,20 @@ const UserBadge = ({ user, imageOnly, small, hideTooltip, huge }: UserBadgeProps
                             <span>{user?.displayName ?? 'Anonymous'}</span>
                         </ReactTooltip>
                 }
-            </div>
+            </UserBadgeHolder>
         );
     }
     return (
-        <RowLayout>
-            <UserBadgeImage>
-                <UserImage user={user}/>
-            </UserBadgeImage>
-            <Body padding="0 0 0 8px">{user?.displayName ?? 'Anonymous'}</Body>
-        </RowLayout>
+        <UserBadgeHolder>
+            <a href={`/user/${user?.userId}`}>
+                <RowLayout>
+                    <UserBadgeImage>
+                        <UserImage user={user}/>
+                    </UserBadgeImage>
+                    <Body padding="0 0 0 8px">{user?.displayName ?? 'Anonymous'}</Body>
+                </RowLayout>
+            </a>
+        </UserBadgeHolder>
     );
 };
 

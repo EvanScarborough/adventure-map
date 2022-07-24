@@ -1,5 +1,10 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
+
+export const PulseAnimation = keyframes`
+    0% { box-shadow: 0 0 0 0 rgba(107, 199, 182, 0.7); }
+    100% { box-shadow: 0 0 0 16px rgba(107, 199, 182, 0); }
+`;
 
 export const PageArea = styled.div`
     width: 100%;
@@ -223,6 +228,9 @@ export const PaginationPage = styled.div<PaginationPageProps>`
     transition: opacity 0.5s;
 `;
 
+export const UserBadgeHolder = styled.div`
+    display: inline-block;
+`;
 export const UserBadgeImage = styled.div`
     width: 32px;
     height: 32px;
@@ -352,6 +360,22 @@ export const ProfileButtonHolder = styled.button`
     border: none;
     box-shadow: 0 0 12px rgba(0,0,0,0.5);
     cursor: pointer;
+`;
+export const NotificationBubble = styled.div`
+    position: absolute;
+    bottom: -2px;
+    left: -2px;
+    padding: 4px;
+    height: 16px;
+    min-width: 16px;
+    border-radius: 16px;
+    border: solid ${props => props.theme.color.primary.contrast} 3px;
+    background-color: ${props => props.theme.color.primary.main};
+    color: ${props => props.theme.color.primary.contrast};
+    box-shadow: 0 0 0 0 rgba(107, 199, 182, 1);
+    animation-name: ${PulseAnimation};
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
 `;
 export const MapButtonHolder = styled.button`
     position: fixed;

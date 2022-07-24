@@ -2,16 +2,19 @@ import { useContext, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, ColumnLayout } from "../../components/basic.styled";
-import { Title } from "../../components/typography.styled";
+import { SectionHeader, Title } from "../../components/typography.styled";
 import UserBadge from "../../components/user-badge.component";
 import AuthContext from "../../hooks/auth-context";
 import useUser from "../../hooks/useUser";
-import { UploadImageButton, UserHeroArea } from "./user.styled";
+import { UploadImageButton, UserBodyArea, UserHeroArea } from "./user.styled";
 import { FiCamera } from "react-icons/fi";
 import Modal from "../../components/modal.component";
 import ImageUploader, { PreviewFile } from "../../components/image-uploader.component";
 import Auth from "../../types/auth";
 import ReactLoading from 'react-loading';
+import useNotifications from "../../hooks/useNotifications";
+import NotificationBadge from "./components/notification.card.component";
+import BackToMapButton from "../../components/back-to-map-button.component";
 
 
 interface UserPageProps {
@@ -21,6 +24,8 @@ const UserPage = ({ login }: UserPageProps) => {
     const auth = useContext(AuthContext);
     const { userId } = useParams<{ userId: string }>();
     const { user, postProfilePic } = useUser(+(userId as string));
+    const notifications = useNotifications();
+    console.log(notifications);
 
     const [ showProfileImageModal, setShowProfileImageModal ] = useState(false);
     const [ files, setFiles ] = useState<PreviewFile[]>([]);
@@ -45,6 +50,7 @@ const UserPage = ({ login }: UserPageProps) => {
 
     return (
         <>
+            <BackToMapButton />
             <UserHeroArea />
             <ColumnLayout>
                 <UserBadge user={user?.user ?? null} huge imageOnly hideTooltip/>
@@ -59,6 +65,13 @@ const UserPage = ({ login }: UserPageProps) => {
                             <UploadImageButton onClick={() => setShowProfileImageModal(true)}><FiCamera size={32}/></UploadImageButton>
                             <Title>{user.user?.displayName}</Title>
                             {isCurrentUser && <Button onClick={() => { login(null); navigate('/'); }}>Log Out</Button>}
+                            <UserBodyArea>
+                                {isCurrentUser &&
+                                <>
+                                    <SectionHeader>Notifications</SectionHeader>
+                                    {notifications.map((n,i) => <NotificationBadge key={i} notification={n}/>)}
+                                </>}
+                            </UserBodyArea>
                         </>
                 }
             </ColumnLayout>

@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../hooks/auth-context";
-import { ProfileButtonHolder } from "./basic.styled";
+import useNotifications from "../hooks/useNotifications";
+import { NotificationBubble, ProfileButtonHolder } from "./basic.styled";
 import UserBadge from "./user-badge.component";
 
 
 const ProfileButton = () => {
     const auth = useContext(AuthContext);
+    const notifications = useNotifications();
     const navigate = useNavigate();
 
     return (
@@ -20,6 +22,7 @@ const ProfileButton = () => {
                     :
                         null
                 }/>
+            { notifications?.length > 0 && <NotificationBubble>{notifications.length}</NotificationBubble>}
         </ProfileButtonHolder>
     );
 };
