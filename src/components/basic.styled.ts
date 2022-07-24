@@ -353,6 +353,21 @@ export const ProfileButtonHolder = styled.button`
     box-shadow: 0 0 12px rgba(0,0,0,0.5);
     cursor: pointer;
 `;
+export const MapButtonHolder = styled.button`
+    position: fixed;
+    z-index: 1000;
+    top: 18px;
+    left: 18px;
+    width: 64px;
+    height: 64px;
+    padding: ${props => props.theme.margin.small};
+    border-radius: 50%;
+    background-color: ${props => props.theme.color.base.main};
+    outline: none;
+    border: none;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    cursor: pointer;
+`;
 
 interface ScreenBackgroundAreaProps {
     show: number

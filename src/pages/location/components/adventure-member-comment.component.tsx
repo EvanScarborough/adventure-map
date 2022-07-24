@@ -11,7 +11,7 @@ const AdventureMemberComment = ({ adventureMember }: { adventureMember: Adventur
             <UserBadge user={adventureMember.user} imageOnly/>
             <MemberCommentDescriptionArea>
                 <Rating rating={adventureMember.rating} />
-                <BodyItalic>{`"${adventureMember.comment}"`}</BodyItalic>
+                {adventureMember.comment && <BodyItalic>{`"${adventureMember.comment}"`}</BodyItalic>}
             </MemberCommentDescriptionArea>
         </MemberCommentArea>
     );
