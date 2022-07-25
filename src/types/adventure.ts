@@ -3,6 +3,7 @@ import { User } from "./user";
 
 export interface Adventure {
     adventureId: number,
+    locationId: number,
     time: Date,
     rating: number,
     description: string,

@@ -15,6 +15,7 @@ import NewLocationPage from './pages/new-location/new-location.component';
 import LocationPage from './pages/location/location.component';
 import LocationNewAdventurePage from './pages/location-new-adventure/location-new-adventure.component';
 import UserPage from './pages/user/user.component';
+import AdventureReviewPage from './pages/adventure-review/adventure-review.component';
 
 const AUTH_LOCALSTORAGE_KEY = "auth";
 
@@ -48,6 +49,7 @@ const App = () => {
             <Route path="/location/:locationId/new-adventure" element={<LocationNewAdventurePage />} />
             <Route path="/location/:locationId" element={<LocationPage />} />
             <Route path="/user/:userId" element={<UserPage login={login} />} />
+            <Route path="/adventure/:adventureId/review" element={<AdventureReviewPage />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </Router>

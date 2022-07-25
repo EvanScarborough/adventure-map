@@ -12,10 +12,12 @@ import AdventureCard from "./components/adventure-card.component";
 import ProfileButton from "../../components/profile-button.component";
 import Modal from "../../components/modal.component";
 import BackToMapButton from "../../components/back-to-map-button.component";
+import useLocationAdventures from "../../hooks/useLocationAdventures";
 
 const LocationPage = () => {
     const { locationId } = useParams();
-    const { location, adventures, errorMessage } = useLocation(+(locationId as string));
+    const { location, errorMessage } = useLocation(+(locationId as string));
+    const { adventures } = useLocationAdventures(+(locationId as string));
     const [ imageModalUrl, setImageModalUrl ] = useState("");
     const [ showImage, setShowImage ] = useState(false);
     const openImageModal = (url: string) => {

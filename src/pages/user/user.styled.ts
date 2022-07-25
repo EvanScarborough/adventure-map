@@ -80,4 +80,7 @@ export const NotificationButton = styled.a`
         box-shadow: 0 0 0 rgba(0,0,0,0);
         transform: translatey(0);
     }
+    &:visited {
+        color: ${props => props.theme.color.primary.contrast};
+    }
 `;

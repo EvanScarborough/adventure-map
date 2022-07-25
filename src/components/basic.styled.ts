@@ -151,19 +151,20 @@ export const RatingOverlayAreaInner = styled.div<RatingAreaProps>`
 
 interface ButtonProps {
     width?: string,
-    cancel?: number
+    cancel?: number,
+    smallText?: number
 };
 export const Button = styled.button<ButtonProps>`
     ${props => props.width ? `width: ${props.width};` : ""}
     margin: ${props => props.theme.margin.small} ${props => props.theme.margin.large};
     padding: ${props => props.theme.margin.small};
     border-radius: ${props => props.theme.border.radius.small};
-    font-size: 1.3em;
+    font-size: ${props => props.smallText ? '1em' : '1.3em'};
     background-color: ${props => props.cancel ? props.theme.color.gray.dark : props.theme.color.primary.main};
     color: ${props => props.cancel ? "#fff" : props.theme.color.primary.contrast};
     outline: none;
     border: none;
-    text-transform: uppercase;
+    text-transform: ${props => props.smallText ? 'none' : 'uppercase'};
     box-shadow: 0 0 0 rgba(0,0,0,0);
     transform: translatey(0);
     transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
@@ -184,6 +185,43 @@ export const Button = styled.button<ButtonProps>`
         box-shadow: 0 0 0 rgba(0,0,0,0);
         transform: translatey(0);
         cursor: auto;
+    }
+`;
+export const LinkButton = styled.a<ButtonProps>`
+    text-align: center;
+    ${props => props.width ? `width: ${props.width};` : ""}
+    margin: ${props => props.theme.margin.small} ${props => props.theme.margin.large};
+    padding: ${props => props.theme.margin.small};
+    border-radius: ${props => props.theme.border.radius.small};
+    font-size: ${props => props.smallText ? '1em' : '1.3em'};
+    background-color: ${props => props.cancel ? props.theme.color.gray.dark : props.theme.color.primary.main};
+    color: ${props => props.cancel ? "#fff" : props.theme.color.primary.contrast};
+    outline: none;
+    border: none;
+    text-transform: ${props => props.smallText ? 'none' : 'uppercase'};
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    transform: translatey(0);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    &:focus, &:hover {
+        background-color: ${props => props.cancel ? props.theme.color.error.dark : props.theme.color.primary.dark};
+        box-shadow: ${props => props.theme.shadow.small};
+        transform: translatey(-2px);
+        outline: none;
+    }
+    &:active {
+        background-color: ${props => props.theme.color.primary.dark};
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+        transform: translatey(0);
+    }
+    &:disabled, &[disabled] {
+        background-color: #ccc;
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+        transform: translatey(0);
+        cursor: auto;
+    }
+    &:visited {
+        color: ${props => props.cancel ? "#fff" : props.theme.color.primary.contrast};
     }
 `;
 
