@@ -62,7 +62,7 @@ const UserPage = ({ login }: UserPageProps) => {
                         </>
                     :
                         <>
-                            <UploadImageButton onClick={() => setShowProfileImageModal(true)}><FiCamera size={32}/></UploadImageButton>
+                            {isCurrentUser && <UploadImageButton onClick={() => setShowProfileImageModal(true)}><FiCamera size={32}/></UploadImageButton>}
                             <Title>{user.user?.displayName}</Title>
                             {isCurrentUser && <Button onClick={() => { login(null); navigate('/'); }}>Log Out</Button>}
                             <UserBodyArea>

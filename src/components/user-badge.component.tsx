@@ -34,7 +34,7 @@ const UserBadge = ({ user, imageOnly, small, hideTooltip, huge }: UserBadgeProps
         return (
             <UserBadgeHolder>
                 <a data-tip={hideTooltip ? false : true} data-for={`user-badge-${user?.userId ?? 'anon'}`}
-                    href={`/user/${user?.userId}`}>
+                    href={user ? `/user/${user?.userId}` : '/login'}>
                     {
                         small
                         ?
@@ -67,7 +67,7 @@ const UserBadge = ({ user, imageOnly, small, hideTooltip, huge }: UserBadgeProps
     }
     return (
         <UserBadgeHolder>
-            <a href={`/user/${user?.userId}`}>
+            <a href={user ? `/user/${user?.userId}` : '/login'}>
                 <RowLayout>
                     <UserBadgeImage>
                         <UserImage user={user}/>
