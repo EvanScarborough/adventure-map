@@ -15,6 +15,7 @@
 .DS_Store
 .env.local
 .env.usb
+.env.prod
 .env.network
 .env.development.local
 .env.test.local
