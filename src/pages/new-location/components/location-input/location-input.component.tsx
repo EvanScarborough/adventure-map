@@ -81,7 +81,7 @@ const LocationInput = ({ locations, selectLocation }: LocationInputProps) => {
         >
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
             <>
-                <SectionHeader>Where was this Adventure?</SectionHeader>
+                <SectionHeader>Start typing a location</SectionHeader>
                 <TextInput
                     placeholder="Search Locations"
                     limitWidth={1}

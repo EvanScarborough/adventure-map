@@ -34,7 +34,7 @@ const NewLocationPage = () => {
             <PageArea>
                 <BackgroundArea/>
                 <MainArea>
-                    <FancyHeader center={1}>New Adventure!</FancyHeader>
+                    <FancyHeader center={1}>New Location</FancyHeader>
                     <DottedDivider />
                     {
                         (!locationConfirmed || selectedLocation == null) ?
