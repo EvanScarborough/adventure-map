@@ -85,6 +85,7 @@ export const ButtonInput = styled.input<ButtonInputProps>`
 
 export const Select = styled.select<ButtonInputProps>`
     ${props => props.width ? `width: ${props.width};` : ""}
+    color: ${props => props.theme.color.base.contrast};
     padding: ${props => props.theme.margin.small};
     margin: ${props => props.theme.margin.med} 0 ${props => props.theme.margin.small} 0;
     border: solid ${props => props.theme.border.width} ${props => props.theme.color.primary.main};

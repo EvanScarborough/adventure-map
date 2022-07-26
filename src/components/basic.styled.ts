@@ -8,6 +8,7 @@ export const PulseAnimation = keyframes`
 
 export const PageArea = styled.div`
     width: 100%;
+    height: 100%;
     min-height: 100%;
     display: flex;
     justify-content: center;
@@ -16,7 +17,7 @@ export const PageArea = styled.div`
 export const BackgroundArea = styled.div`
     position: fixed;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     top: 0;
     left: 0;
     z-index: 1;
@@ -34,11 +35,12 @@ export const MainArea = styled.div<MainAreaProps>`
     width: calc(100% - 48px);
     margin: 48px 0;
     padding-top: 20px;
+    padding-bottom: 10px;
     max-width: 800px;
-    min-height: calc(100vh - 116px);
+    min-height: calc(100% - 116px);
     ${props => props.hardLimitHeight ?
-        `height: calc(100vh - 116px);
-         max-height: calc(100vh - 116px);`
+        `height: calc(100% - 116px);
+         max-height: calc(100% - 116px);`
         : ""}
     background-color: ${props => props.theme.color.base.main};
     border-radius: ${props => props.theme.border.radius.large};

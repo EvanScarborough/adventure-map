@@ -17,6 +17,9 @@ export const FancyHeader = styled.h1<TypographyProps>`
     padding: ${props => props.padding ?? "0"};
     text-align: ${props => props.center ? "center" : "left"};
     ${props => props.fillWidth ? "width: 100%;" : ""}
+    @media (max-width: 768px) {
+        font-size: 2.8em;
+    }
 `;
 
 export const Title = styled.h1<TypographyProps>`

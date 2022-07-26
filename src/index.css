@@ -47,6 +47,9 @@ a:visited {
   color: #57827a;
 }
 
+select {
+  color: black;
+}
 input, textarea {
   -webkit-appearance: none;
 }

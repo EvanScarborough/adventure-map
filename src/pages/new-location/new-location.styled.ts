@@ -32,5 +32,6 @@ export const Suggestion = styled.div`
 
 export const ConfirmMapHolder = styled.div`
     width: calc(100% - 60px);
-    height: 400px;
+    height: 100%;
+    min-height: 200px;
 `;
