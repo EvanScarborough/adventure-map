@@ -18,7 +18,7 @@ const CardArea = ({ locations }:CardAreaProps) => {
             <ShowControlPanelButton
                 show={show ? 1 : 0}
                 onClick={()=>setShow(!show)}>
-                {show ? <FiX size="24px"/> : <FiMenu size="24px"/>}
+                {show ? <FiX size="24px" color="black"/> : <FiMenu size="24px" color="black"/>}
             </ShowControlPanelButton>
             <SideControlScrollArea>
                 <FancyHeader padding="8px 24px">Locations</FancyHeader>
@@ -28,8 +28,7 @@ const CardArea = ({ locations }:CardAreaProps) => {
                 </CardHolderArea>
             </SideControlScrollArea>
             <AddLocationButton
-                onClick={() => navigate("/new-location")}
-                >
+                onClick={() => navigate("/new-location")}>
                 Add Location
             </AddLocationButton>
         </SideControlPanel>

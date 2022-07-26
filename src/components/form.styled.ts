@@ -60,6 +60,7 @@ export const ButtonInput = styled.input<ButtonInputProps>`
     padding: ${props => props.theme.margin.small};
     border-radius: ${props => props.theme.border.radius.small};
     font-size: 1.3em;
+    font-weight: normal;
     background-color: ${props => props.theme.color.primary.main};
     color: ${props => props.theme.color.primary.contrast};
     outline: none;

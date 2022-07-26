@@ -391,6 +391,9 @@ export const ProfileButtonHolder = styled.button`
     z-index: 1000;
     top: 10px;
     right: 10px;
+    width: 80px;
+    height: 80px;
+    max-height: 80px;
     padding: ${props => props.theme.margin.small};
     border-radius: 50%;
     background-color: ${props => props.theme.color.base.main};

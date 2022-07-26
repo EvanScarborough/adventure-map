@@ -47,7 +47,7 @@ const RegisterPage = ({ login }:RegisterPageProps) => {
             <LoginArea>
                 <FancyHeader center={1}>Create An Account</FancyHeader>
                 <DottedDivider />
-                <Body center={1}>With an account, you can react to adventures, but cannot document your own.</Body>
+                <Body center={1} padding="0 16px">With an account, you can react to adventures, but cannot document your own.</Body>
                 {warning && <Banner type="error">{warning}</Banner>}
                 <Form onSubmit={submit}>
                     <Label htmlFor="email">Email</Label>

@@ -1,10 +1,22 @@
-/* body {
-  background-color: #57827a;
-} */
+html {
+  min-height: calc(100% + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
 
 html, body, #root {
   margin: 0;
   height: 100%;
+}
+
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+#root {
+  background-color: white;
 }
 
 /* https://www.1001fonts.com/actonia-personal-use-font.html */
@@ -28,8 +40,13 @@ code {
 
 a {
   text-decoration: none;
-  color: black;
+  font-weight: 600;
+  color: #57827a;
 }
 a:visited {
-  color: black;
+  color: #57827a;
+}
+
+input, textarea {
+  -webkit-appearance: none;
 }

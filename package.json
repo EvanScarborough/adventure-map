@@ -17,6 +17,7 @@
     "google-map-react": "^2.1.10",
     "react": "^17.0.2",
     "react-date-picker": "^8.4.0",
+    "react-div-100vh": "^0.7.0",
     "react-dom": "^17.0.2",
     "react-dropzone": "^14.2.1",
     "react-icons": "^4.3.1",
@@ -34,6 +35,7 @@
   "scripts": {
     "start": "env-cmd -f .env.local react-scripts start",
     "start-network": "env-cmd -f .env.network react-scripts start",
+    "start-usb": "env-cmd -f .env.usb react-scripts start",
     "build": "react-scripts build",
     "build-prod": "env-cmd -f .env.prod react-scripts build",
     "test": "react-scripts test",

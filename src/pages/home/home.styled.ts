@@ -130,7 +130,7 @@ export const SideControlPanel = styled.div<SideControlPanelProps>`
     left: ${props => props.show ? "0" : "-400px"};
     width: 400px;
     max-width: ${props => props.show ? "100vw" : "400px"};
-    height: 100vh;
+    height: 100%;
     z-index: 1000;
     background-color: white;
     box-shadow: 0 0 12px rgba(0,0,0,0.5);
