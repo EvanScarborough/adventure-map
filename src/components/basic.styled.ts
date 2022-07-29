@@ -468,7 +468,7 @@ export const ModalArea = styled.div<ModalAreaProps>`
     ${props => props.width ? `width: ${props.width};` : ''}
     ${props => props.height ? `height: ${props.height};` : ''}
     max-width: calc(100vw - 120px);
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 240px);
     border-radius: ${props => props.theme.border.radius.large};
     padding: ${props => props.theme.padding.medlarge};
     transform: scale(${props => props.show ? '1' : '0'},${props => props.show ? '1' : '0'});
