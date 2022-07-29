@@ -4,11 +4,29 @@ import {useDropzone} from 'react-dropzone';
 import { SmallNote } from "./typography.styled";
 import heic2any from "heic2any";
 import ReactLoading from 'react-loading';
+import imageCompression from 'browser-image-compression';
 
 export interface PreviewFile {
     preview: string,
     file: File
 };
+
+const compressionOptions = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true
+};
+
+const convertIfHeic = (file: File): Promise<File> => {
+    if (file.type === 'image/heic' || file.type === 'image/heif') {
+        const fblob = file as Blob;
+        return heic2any({ blob: fblob, toType: 'image/jpeg', quality: 0.5 })
+            .then(b => new File([b as Blob], "convertedFile.jpeg", {
+                type: 'image/jpeg'
+            }));
+    }
+    return Promise.resolve(file);
+}
 
 interface ImageUploaderProps {
     files: PreviewFile[],
@@ -23,27 +41,21 @@ const ImageUploader = ({ files, setFiles, maxFiles, width }: ImageUploaderProps)
     const onDropImage = (acceptedFiles: File[]) => {
         if (files.length >= maxFileCount) return;
         setIsProcessing(true);
-        Promise.all(acceptedFiles.map(f => {
-            if (f.type === 'image/heic' || f.type === 'image/heif') {
-                const fblob = f as Blob;
-                return heic2any({ blob: fblob, toType: 'image/jpeg', quality: 0.5 })
-                    .then(b => new File([b as Blob], "convertedFile.jpeg", {
-                        type: 'image/jpeg'
-                    }));
-            }
-            return f;
-        })).then(out => {
-            setFiles([...files, ...out.map(f => {
-                return {
-                    preview: URL.createObjectURL(f),
-                    file: f
-                }
-            })])
-        })
-        .catch(err => {
-            console.log(err);
-        })
-        .finally(() => setIsProcessing(false));
+        Promise.all(acceptedFiles
+            .map(f => convertIfHeic(f)
+                .then(f => imageCompression(f, compressionOptions))))
+            .then(out => {
+                setFiles([...files, ...out.map(f => {
+                    return {
+                        preview: URL.createObjectURL(f),
+                        file: f
+                    }
+                })])
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => setIsProcessing(false));
     };
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone(
