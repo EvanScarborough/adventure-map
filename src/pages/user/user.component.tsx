@@ -25,7 +25,6 @@ const UserPage = ({ login }: UserPageProps) => {
     const { userId } = useParams<{ userId: string }>();
     const { user, postProfilePic } = useUser(+(userId as string));
     const notifications = useNotifications();
-    console.log(notifications);
 
     const [ showProfileImageModal, setShowProfileImageModal ] = useState(false);
     const [ files, setFiles ] = useState<PreviewFile[]>([]);

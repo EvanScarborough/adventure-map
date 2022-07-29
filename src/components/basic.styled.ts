@@ -278,6 +278,7 @@ export const UserBadgeImage = styled.div`
     min-height: 32px;
     border-radius: 16px;
     & > img, & > div {
+        object-fit: cover;
         width: 32px;
         height: 32px;
         min-width: 32px;
@@ -292,6 +293,7 @@ export const LargeUserBadgeImage = styled.div`
     min-height: 64px;
     border-radius: 32px;
     & > img, & > div {
+        object-fit: cover;
         width: 64px;
         height: 64px;
         min-width: 64px;
@@ -307,6 +309,7 @@ export const HugeUserBadgeImage = styled.div`
     min-height: 256px;
     border-radius: 128px;
     & > img, & > div {
+        object-fit: cover;
         width: 256px;
         height: 256px;
         min-width: 256px;

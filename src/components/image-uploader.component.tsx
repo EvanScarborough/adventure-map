@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { CollectionLayout, ColumnLayout, ImagePreview, ImagePreviewHolder, ImageUploadArea, ImageUploadInput } from "./basic.styled";
 import {useDropzone} from 'react-dropzone';
 import { SmallNote } from "./typography.styled";
+import heic2any from "heic2any";
+import ReactLoading from 'react-loading';
 
 export interface PreviewFile {
     preview: string,
@@ -15,21 +17,40 @@ interface ImageUploaderProps {
     width?: string
 };
 const ImageUploader = ({ files, setFiles, maxFiles, width }: ImageUploaderProps) => {
+    const [ isProcessing, setIsProcessing ] = useState(false);
     const maxFileCount = maxFiles ?? 3;
 
-    const onDropImage = (acceptedFiles:File[]) => {
+    const onDropImage = (acceptedFiles: File[]) => {
         if (files.length >= maxFileCount) return;
-        setFiles([...files, ...acceptedFiles.map((file:File) => {return {
-            preview: URL.createObjectURL(file),
-            file: file
-        }})]);
+        setIsProcessing(true);
+        Promise.all(acceptedFiles.map(f => {
+            if (f.type === 'image/heic' || f.type === 'image/heif') {
+                const fblob = f as Blob;
+                return heic2any({ blob: fblob, toType: 'image/jpeg', quality: 0.5 })
+                    .then(b => new File([b as Blob], "convertedFile.jpeg", {
+                        type: 'image/jpeg'
+                    }));
+            }
+            return new Promise<File>(_ => f);
+        })).then(out => {
+            setFiles([...files, ...out.map(f => {
+                return {
+                    preview: URL.createObjectURL(f),
+                    file: f
+                }
+            })])
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        .finally(() => setIsProcessing(false));
     };
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone(
         {
             onDrop:onDropImage,
             accept: {
-                'image/*': ['.jpeg', '.png']
+                'image/*': ['.jpeg', '.png', '.jpg', '.heic', '.heif', '.JPEG', '.PNG', '.JPG', '.HEIC', '.HEIF']
             },
             maxFiles: maxFileCount
         }
@@ -43,6 +64,7 @@ const ImageUploader = ({ files, setFiles, maxFiles, width }: ImageUploaderProps)
     return (
         <ColumnLayout width={width ?? "calc(100% - 60px)"}>
             {
+                isProcessing ? <ReactLoading color="#ccc" type="bars" /> :
                 (maxFileCount > 1 || files.length === 0) &&
                 <ImageUploadArea {...getRootProps()} dragOver={isDragActive && files.length < maxFileCount ? 1 : 0}>
                     <ImageUploadInput {...getInputProps()} />
@@ -59,7 +81,7 @@ const ImageUploader = ({ files, setFiles, maxFiles, width }: ImageUploaderProps)
                     }
                 </ImageUploadArea>
             }
-            { files.length > 0 && <SmallNote>Click on images to remove them</SmallNote>}
+            { (files.length > 0 && maxFileCount > 1) && <SmallNote>Click on images to remove them</SmallNote>}
             <CollectionLayout>
                 {files.map((f,i) => <ImagePreviewHolder
                     key={i}
