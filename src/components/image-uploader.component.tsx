@@ -31,7 +31,7 @@ const ImageUploader = ({ files, setFiles, maxFiles, width }: ImageUploaderProps)
                         type: 'image/jpeg'
                     }));
             }
-            return new Promise<File>(_ => f);
+            return f;
         })).then(out => {
             setFiles([...files, ...out.map(f => {
                 return {
