@@ -7,7 +7,7 @@ const BackToMapButton = () => {
     return (
         <MapButtonHolder
             onClick={() => navigate('/')}>
-            <FiMap size="24px"/>
+            <FiMap size="24px" color="black"/>
         </MapButtonHolder>
     );
 };

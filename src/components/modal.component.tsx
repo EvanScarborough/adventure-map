@@ -17,7 +17,7 @@ const Modal = ({ show, title, width, height, onClose, children }: ModalProps) =>
             <ModalArea show={show ? 1 : 0} width={width} height={height} onClick={e => e.stopPropagation()}>
                 <RowLayout space={1} margin="0 0 16px 0">
                     <SectionHeader margin="0 16px 0 0">{title}</SectionHeader>
-                    <BoxButton onClick={() => onClose()}><FiX size="32px"/></BoxButton>
+                    <BoxButton onClick={() => onClose()}><FiX size="32px" color="black"/></BoxButton>
                 </RowLayout>
                 {children}
             </ModalArea>
